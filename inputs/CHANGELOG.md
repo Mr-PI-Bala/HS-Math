@@ -1,12 +1,17 @@
 # Change Log
 
+## [v1.0.9] - 2026-05-04
+### Updated
+- Top row now aligns middle filter controls with a compact right utility column for Desmos/TI-84/interview gotchas.
+- Added Desmos and TI-84 popout launch buttons and interview gotchas popup content.
+
+## [v1.0.8] - 2026-05-04
+### Updated
+- Auto-export interval is now editable (default 5) and persisted in local state and exported/imported JSON.
+
 ## [v1.0.7] - 2026-05-04
 ### Fixed
 - Restored ArrowLeft keyboard navigation to previous card during study flow.
-
-## [Unreleased] - 2026-05-04
-### Updated
-- Auto-export interval is now editable (default 5) and persisted in local state and exported/imported JSON.
 
 ## [v1.0.6] - 2026-05-04
 ### Updated

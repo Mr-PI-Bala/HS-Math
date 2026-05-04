@@ -51,6 +51,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 19. Compact hint progress badge shown next to hint button.
 20. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
 21. Editable auto-export interval (default 5) persisted in local/export/import state.
+22. Top-right utility actions for Desmos popout, TI-84 emulator popout, and interview gotchas prep popup.
 
 ## Category Coverage (Implemented)
 - Algebra

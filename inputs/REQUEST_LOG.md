@@ -34,3 +34,4 @@
 25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.
 26. [Implemented] Fix ArrowLeft keyboard navigation so previous-card works during hints/question/answer states.
 27. [Implemented] Make auto-export interval user-editable (default 5) and persist it in exported/imported progress state.
+28. [Implemented] Add top-right utility buttons for Desmos popout, TI-84 emulator popout, and teacher interview gotchas popup.

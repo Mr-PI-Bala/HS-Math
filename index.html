@@ -205,8 +205,15 @@
     .study-panel {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.42rem;
       min-width: 0;
+    }
+
+    .top-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 145px;
+      gap: 0.55rem;
+      align-items: stretch;
     }
 
     .study-workspace {
@@ -238,6 +245,36 @@
       min-height: 34px;
       overflow: hidden;
     }
+
+    .top-utility {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.18rem;
+      padding: 0.22rem;
+      min-height: 34px;
+      align-items: center;
+    }
+
+    .utility-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 8px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.22rem 0.1rem;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .utility-btn:hover { background: #f8f9ff; }
+    .utility-btn.tools { color: #2f3f9b; border-color: #cfd7ff; }
 
     .toolbar-label {
       font-size: 0.62rem;
@@ -906,6 +943,7 @@
         max-height: none;
       }
       .study-workspace { grid-template-columns: 1fr; }
+      .top-band { grid-template-columns: 1fr; }
       .control-rail {
         position: static;
         max-height: none;
@@ -913,6 +951,7 @@
       header { padding: 0.6rem 0.8rem; }
       .current-category-chip { margin-left: 0; }
       .study-toolbar { flex-wrap: wrap; }
+      .top-utility { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     @media (max-width: 520px) {
@@ -976,21 +1015,29 @@
       </aside>
 
       <section class="study-panel">
-        <div class="study-toolbar">
-          <div class="toolbar-group">
-            <span class="toolbar-label">Category</span>
-            <select id="deck-filter" aria-label="Select deck"></select>
+        <div class="top-band">
+          <div class="study-toolbar">
+            <div class="toolbar-group">
+              <span class="toolbar-label">Category</span>
+              <select id="deck-filter" aria-label="Select deck"></select>
+            </div>
+            <div class="toolbar-group">
+              <span class="toolbar-label">Card Filter</span>
+              <select id="filter-status" aria-label="Filter by status">
+                <option value="all">All cards</option>
+                <option value="new">New only</option>
+                <option value="review">Review only</option>
+                <option value="strong">Strong only</option>
+              </select>
+            </div>
+            <div class="current-category-chip" id="current-category-chip">Current: All decks</div>
           </div>
-          <div class="toolbar-group">
-            <span class="toolbar-label">Card Filter</span>
-            <select id="filter-status" aria-label="Filter by status">
-              <option value="all">All cards</option>
-              <option value="new">New only</option>
-              <option value="review">Review only</option>
-              <option value="strong">Strong only</option>
-            </select>
+
+          <div class="top-utility">
+            <button class="utility-btn tools" id="btn-desmos" type="button" title="Open Desmos calculator in a popout">Desmos</button>
+            <button class="utility-btn tools" id="btn-ti84" type="button" title="Open TI-84 emulator in a popout">TI-84</button>
+            <button class="utility-btn" id="btn-interview-gotchas" type="button" title="Teacher interview gotchas">...</button>
           </div>
-          <div class="current-category-chip" id="current-category-chip">Current: All decks</div>
         </div>
 
         <div class="study-workspace">
@@ -1139,6 +1186,41 @@
 const STORAGE_KEY = 'hsMath_progress_v2';
 const MANIFEST = 'cfg/manifest.json';
 const CORE_MASTERY_TARGET = 14;
+const DESMOS_URL = 'https://www.desmos.com/calculator';
+const TI84_EMULATOR_URL = 'https://ti84calc.com/ti84calc/';
+const INTERVIEW_GOTCHAS = [
+  'Common High School Teacher Interview Gotchas',
+  '',
+  '1) Classroom management specifics',
+  '- Be ready with exact routines for entry, transitions, group work, and reset.',
+  '',
+  '2) Data-informed instruction',
+  '- Explain how you use formative checks and what you do the next day if data is weak.',
+  '',
+  '3) Differentiation under time pressure',
+  '- Give one concrete strategy for multilingual learners and one for IEP accommodations.',
+  '',
+  '4) Parent communication',
+  '- Share your cadence, tone, and escalation path for difficult conversations.',
+  '',
+  '5) Equity and belonging',
+  '- Show how you design participation so all students are seen and supported.',
+  '',
+  '6) Assessment philosophy',
+  '- Clarify retakes, partial credit, and how you protect rigor with fairness.',
+  '',
+  '7) Technology use',
+  '- Mention when you use Desmos/TI tools and when you require non-calculator reasoning.',
+  '',
+  '8) Why this school/district',
+  '- Tie your answer to their student profile and existing initiatives.',
+  '',
+  '9) Demo-lesson readiness',
+  '- Have a 10-15 minute mini-lesson with objective, check for understanding, and closure.',
+  '',
+  '10) Reflective practice',
+  '- Give a real example of a lesson that failed and what you changed afterward.'
+].join('\n');
 
 let decks = [];
 let progressData = createEmptyProgress();
@@ -1564,6 +1646,13 @@ function closeExpandPanel() {
   expandOverlay.setAttribute('aria-hidden', 'true');
 }
 
+function openUtilityPopout(url, name) {
+  const popup = window.open(url, name, 'popup=yes,width=1280,height=820,noopener,noreferrer');
+  if (!popup) {
+    showToast('Popup blocked. Allow popups for this site and try again.');
+  }
+}
+
 function bindExpandable(target, fallbackTitle) {
   target.addEventListener('click', e => {
     e.preventDefault();
@@ -1865,6 +1954,21 @@ $('btn-hint').addEventListener('click', e => {
 });
 $('btn-restart').addEventListener('click', buildQueue);
 $('btn-export-done').addEventListener('click', exportProgress);
+
+$('btn-desmos').addEventListener('click', e => {
+  e.preventDefault();
+  openUtilityPopout(DESMOS_URL, 'desmosCalculator');
+});
+
+$('btn-ti84').addEventListener('click', e => {
+  e.preventDefault();
+  openUtilityPopout(TI84_EMULATOR_URL, 'ti84Emulator');
+});
+
+$('btn-interview-gotchas').addEventListener('click', e => {
+  e.preventDefault();
+  openExpandPanel('Teacher Interview Gotchas', INTERVIEW_GOTCHAS);
+});
 
 hintSlots.forEach((slot, index) => {
   slot.addEventListener('click', e => {

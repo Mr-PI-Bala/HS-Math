@@ -31,6 +31,7 @@
 - Right rail for grouped controls and legend
 - Keyboard mapping for high-speed operation
 - Hint interaction policy where hints do not force answer reveal
+- Top utility actions for calculator tools and interview-prep gotchas popup
 
 5. Pedagogy Layer
 - Right-side answer scaffold: steps and memory tip

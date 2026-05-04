@@ -85,6 +85,16 @@ Hints, answers, examples, steps, and tips are visually clamped inside the flashc
 - Click that region to open an expanded popup.
 - Click outside popup or press `Esc` to close.
 
+## Utility tools
+
+Top-right utility buttons provide fast access to:
+
+- Desmos calculator popout
+- TI-84 emulator popout
+- Teacher interview gotchas popup
+
+Note: Browser popup blockers may need to be disabled for these popouts.
+
 ## Adding or editing cards
 
 Edit any file in `cfg/decks/` directly — they're plain JSON:

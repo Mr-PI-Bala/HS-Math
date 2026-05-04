@@ -46,9 +46,16 @@ Back:
 
 ## Layout Density Rules
 - Top toolbar (category/filter/current) rendered as a slim single row above workspace.
+- Top-right utility button group (Desmos, TI-84, interview gotchas) shares the same top row.
 - Left dashboard and right control rail use compact typography and spacing.
 - Action buttons and keyboard hint row are condensed to preserve vertical card space.
 - Primary layout objective: maximize flashcard viewport area while retaining controls.
+
+## Utility Actions
+- `Desmos` button opens graphing calculator in popup window.
+- `TI-84` button opens TI-84 emulator site in popup window.
+- `...` button opens interview gotchas content in existing expand dialog.
+- Popup blocker detection shows toast guidance when blocked.
 
 ## Interaction Handlers
 - Click card: flip reveal/hide
