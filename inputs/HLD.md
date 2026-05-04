@@ -25,12 +25,14 @@
 - Auto-export action threshold handling (user-configurable cadence)
 
 4. UX and Navigation
-- Sidebar dashboard for category counts
+- Sidebar focused on deck categories
 - Toolbar with aligned category + card filter + current state above flashcards
+- Top stats row includes total plus core/optional split
 - Left and right rails consume full workspace height below top stats row
 - Left sidebar deck cards are collapsible stacks (active deck open by default)
 - Right rail for grouped controls and legend with collapsible sections
 - Keyboard mapping for high-speed operation
+- Touch swipe mapping for iPad/tablet operation on center study area
 - Hint interaction policy where hints do not force answer reveal
 
 5. Pedagogy Layer
@@ -47,8 +49,8 @@
 - User controls export/import artifacts
 
 ## Responsiveness
-- Desktop: left dashboard + main content + right controls
-- Mobile/tablet: collapses to single-column readable flow
+- Desktop: left category sidebar + main content + right controls
+- Mobile/tablet: collapses to single-column readable flow with touch swipe support
 - Dense desktop mode: side rails and control bands are intentionally slim to maximize flashcard display area
 
 ## Operational Baseline

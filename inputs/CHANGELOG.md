@@ -7,9 +7,13 @@
 - Reduced overlap between top-right card status badge (NEW/REVIEW/STRONG) and hint progress indicator.
 ### Updated
 - Keyboard legend uses compact Unicode symbols (→ ← ↑ ↓ ⇧ Spc Esc ⌫) to save space.
+- Legend is split into Swipe Gestures and Keyboard Commands sections.
+- Swipe gestures are supported on center study area for touch devices (up=strong, down=review, left=previous, right=skip).
 - Right rail sections (Legend, Session Controls, Data Controls) are now collapsible; Legend open by default, others collapsed.
 - Top controls are aligned as Category / Card Filter / Current State directly above flashcard workspace.
-- Left dashboard deck cards now use collapsible stack sections; active deck remains open by default.
+- Top stats now show total as Total(core, optional) for quick breakdown context.
+- Left sidebar now focuses on categories only; redundant dashboard block removed.
+- Left sidebar deck cards now use collapsible stack sections; active deck remains open by default.
 - Auto-export cadence now uses a user-entered card threshold and persists through local save/export/import.
 
 ## [v1.0.5] - 2026-05-04

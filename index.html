@@ -867,11 +867,21 @@
     .rail-btn.end { border-color: #cfd7ff; color: #2f3f9b; }
     .rail-btn.reset { border-color: #f7c6c6; color: #b91c1c; }
 
+    .legend-subhead {
+      margin: 0.25rem 0 0.15rem;
+      font-size: 0.62rem;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 800;
+    }
+
     .legend-list {
       display: grid;
       gap: 0.15rem;
       font-size: 0.62rem;
       color: var(--muted);
+      margin-bottom: 0.28rem;
     }
 
     .legend-list strong { color: var(--text); }
@@ -1052,11 +1062,6 @@
     <div class="study-layout">
       <aside class="sidebar">
         <section>
-          <h2>Dashboard</h2>
-          <div class="overview-grid" id="overview-grid"></div>
-        </section>
-
-        <section>
           <h2>Categories</h2>
           <div class="sidebar-toggle">
             <label><input type="checkbox" id="toggle-optional-cards" /> Include (Optional) stacked cards</label>
@@ -1088,7 +1093,7 @@
         </div>
 
         <div class="study-workspace">
-          <div class="study-main">
+          <div class="study-main" id="study-main">
             <div id="empty-state" style="display:none">
               <h2>No cards found</h2>
               <p>Try a different category or status filter.</p>
@@ -1177,18 +1182,28 @@
           <aside class="control-rail">
             <section class="rail-group" id="rail-legend">
               <h3 class="rail-head">Legend <span class="rail-toggle">▼</span></h3>
-              <div class="rail-group-body"><div class="legend-list">
-                <div><strong>→</strong> Skip card</div>
-                <div><strong>←</strong> Previous card</div>
-                <div><strong>↑</strong> Mark Strong</div>
-                <div><strong>↓</strong> Mark Review</div>
-                <div><strong>⇧↓</strong> Next category</div>
-                <div><strong>⇧↑</strong> Focus category</div>
-                <div><strong>Spc</strong> Reveal / Next</div>
-                <div><strong>H</strong> Next hint</div>
-                <div><strong>Esc</strong> Hide answer</div>
-                <div><strong>⌫</strong> Undo last action</div>
-              </div></div>
+              <div class="rail-group-body">
+                <div class="legend-subhead">Swipe Gestures</div>
+                <div class="legend-list">
+                  <div><strong>↑ Swipe</strong> Mark Strong</div>
+                  <div><strong>↓ Swipe</strong> Mark Review</div>
+                  <div><strong>← Swipe</strong> Previous card</div>
+                  <div><strong>→ Swipe</strong> Skip card</div>
+                </div>
+                <div class="legend-subhead">Keyboard Commands</div>
+                <div class="legend-list">
+                  <div><strong>→</strong> Skip card</div>
+                  <div><strong>←</strong> Previous card</div>
+                  <div><strong>↑</strong> Mark Strong</div>
+                  <div><strong>↓</strong> Mark Review</div>
+                  <div><strong>⇧↓</strong> Next category</div>
+                  <div><strong>⇧↑</strong> Focus category</div>
+                  <div><strong>Spc</strong> Reveal / Next</div>
+                  <div><strong>H</strong> Next hint</div>
+                  <div><strong>Esc</strong> Hide answer</div>
+                  <div><strong>⌫</strong> Undo last action</div>
+                </div>
+              </div>
             </section>
 
             <section class="rail-group collapsed" id="rail-session">
@@ -1260,6 +1275,10 @@ let includeOptionalCards = false;
 let sessionEnded = false;
 let actionHistory = [];
 let hintLevel = 0;
+let swipeStartX = 0;
+let swipeStartY = 0;
+let swipeActive = false;
+let suppressNextCardClick = false;
 
 const $ = id => document.getElementById(id);
 const deckFilter = $('deck-filter');
@@ -1273,7 +1292,7 @@ const doneState = $('done-state');
 const statsBar = $('stats-bar');
 const progressBar = $('progress-bar');
 const deckList = $('deck-list');
-const overviewGrid = $('overview-grid');
+const studyMain = $('study-main');
 const optionalToggle = $('toggle-optional-cards');
 const sessionEndedState = $('session-ended-state');
 const currentCategoryChip = $('current-category-chip');
@@ -1775,23 +1794,6 @@ function renderSidebar() {
 
   deckList.innerHTML = html;
 
-  const allCards = decks.flatMap(d => d.cards);
-  const total = allCards.length;
-  const strong = allCards.filter(c => getStatus(c.id) === 'strong').length;
-  const review = allCards.filter(c => getStatus(c.id) === 'review').length;
-  const newC = allCards.filter(c => getStatus(c.id) === 'new').length;
-
-  overviewGrid.innerHTML = `
-    <div class="overview-tile"><small>Total</small><strong>${total}</strong></div>
-    <div class="overview-tile"><small>Core</small><strong>${allPartition.core}</strong></div>
-    <div class="overview-tile"><small>Optional</small><strong>${allPartition.optional}</strong></div>
-    <div class="overview-tile"><small>Reviewed</small><strong>${allStats.reviewed}</strong></div>
-    <div class="overview-tile"><small>Skipped</small><strong>${allStats.skipped}</strong></div>
-    <div class="overview-tile"><small>Strong</small><strong>${strong}</strong></div>
-    <div class="overview-tile"><small>Needs Review</small><strong>${review}</strong></div>
-    <div class="overview-tile"><small>New</small><strong>${newC}</strong></div>
-  `;
-
   deckList.querySelectorAll('.deck-head').forEach(btn => {
     btn.addEventListener('click', () => {
       deckFilter.value = btn.dataset.deckId;
@@ -1827,6 +1829,12 @@ function deckItemTemplate({ id, name, total, status, activity, active, open }) {
 
 function renderStats() {
   const allCards = decks.flatMap(d => d.cards);
+  const totals = decks.reduce((acc, deck) => {
+    const part = getDeckPartitions(deck);
+    acc.core += part.core.length;
+    acc.optional += part.optional.length;
+    return acc;
+  }, { core: 0, optional: 0 });
   const strong = allCards.filter(c => getStatus(c.id) === 'strong').length;
   const review = allCards.filter(c => getStatus(c.id) === 'review').length;
   const newC = allCards.filter(c => getStatus(c.id) === 'new').length;
@@ -1835,7 +1843,7 @@ function renderStats() {
   const skipped = Object.values(progressData.deckStats).reduce((acc, d) => acc + (d.skipped || 0), 0);
 
   statsBar.innerHTML = `
-    Total: <span>${total}</span>
+    Total: <span>${total} (${totals.core}, ${totals.optional})</span>
     | Reviewed actions: <span>${reviewed}</span>
     | Skipped actions: <span>${skipped}</span>
     | <span class="stat-strong">Strong: ${strong}</span>
@@ -1880,6 +1888,70 @@ function focusCategoryPicker() {
   deckFilter.focus();
   deckFilter.click();
   showToast('Category selector focused. Use arrows and Enter to choose.');
+}
+
+function shouldIgnoreSwipeTarget(target) {
+  return !!target.closest('button, input, select, textarea, a, .rail-group, .deck-head, .hint-slot');
+}
+
+function handleSwipeAction(direction) {
+  if (direction === 'left') {
+    if (queueIdx === 0) {
+      showToast('Already at first card');
+      return;
+    }
+    previousCard();
+    return;
+  }
+
+  if (direction === 'right') {
+    skipCard();
+    return;
+  }
+
+  if (direction === 'up') {
+    if (!revealed) toggleReveal();
+    markCard('strong');
+    return;
+  }
+
+  if (direction === 'down') {
+    if (!revealed) toggleReveal();
+    markCard('review');
+  }
+}
+
+function onSwipeStart(clientX, clientY, target) {
+  if (shouldIgnoreSwipeTarget(target)) return;
+  swipeStartX = clientX;
+  swipeStartY = clientY;
+  swipeActive = true;
+}
+
+function onSwipeEnd(clientX, clientY) {
+  if (!swipeActive) return;
+  swipeActive = false;
+
+  const dx = clientX - swipeStartX;
+  const dy = clientY - swipeStartY;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+  const minDistance = 48;
+
+  if (absX < minDistance && absY < minDistance) return;
+
+  if (absX >= absY * 1.2) {
+    suppressNextCardClick = true;
+    setTimeout(() => { suppressNextCardClick = false; }, 280);
+    handleSwipeAction(dx > 0 ? 'right' : 'left');
+    return;
+  }
+
+  if (absY >= absX * 1.2) {
+    suppressNextCardClick = true;
+    setTimeout(() => { suppressNextCardClick = false; }, 280);
+    handleSwipeAction(dy > 0 ? 'down' : 'up');
+  }
 }
 
 function markCard(status) {
@@ -1969,13 +2041,35 @@ function undoLastAction() {
   showToast('Undid last action');
 }
 
-cardEl.addEventListener('click', toggleReveal);
+cardEl.addEventListener('click', () => {
+  if (suppressNextCardClick) {
+    suppressNextCardClick = false;
+    return;
+  }
+  toggleReveal();
+});
 cardEl.addEventListener('keydown', e => {
   if (e.key === ' ' || e.key === 'Enter') {
     e.preventDefault();
     toggleReveal();
   }
 });
+
+studyMain.addEventListener('touchstart', e => {
+  if (!e.touches || e.touches.length === 0) return;
+  const t = e.touches[0];
+  onSwipeStart(t.clientX, t.clientY, e.target);
+}, { passive: true });
+
+studyMain.addEventListener('touchend', e => {
+  if (!e.changedTouches || e.changedTouches.length === 0) return;
+  const t = e.changedTouches[0];
+  onSwipeEnd(t.clientX, t.clientY);
+}, { passive: true });
+
+studyMain.addEventListener('touchcancel', () => {
+  swipeActive = false;
+}, { passive: true });
 
 $('btn-reveal').addEventListener('click', toggleReveal);
 $('btn-strong').addEventListener('click', () => markCard('strong'));

@@ -32,7 +32,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 ## Current Feature Scope (Implemented)
 1. Deck/category-based flashcards loaded from JSON manifest.
 2. Core and Optional stacked deck model.
-3. Category dashboard (counts and progress stats).
+3. Category sidebar focused on collapsible deck categories and quick deck switching.
 4. Card status tracking (new/review/strong).
 5. Action tracking (reviewed/skipped/marks by deck).
 6. Reveal/hide answer flip flow.
@@ -43,7 +43,8 @@ Provide a high-impact, low-friction study tool for middle school and high school
 11. Export, import, and clipboard copy JSON controls.
 12. Session controls: End Session (pause) and Reset Progress (clear data).
 13. Keyboard navigation and legend.
-14. Responsive two-column study layout with right-side control rail.
+14. Swipe gesture navigation on touch devices (center study area).
+15. Responsive two-column study layout with right-side control rail.
 15. Multiple deck families: HS, AP, MS, and bonus fun/tricks.
 16. Hint ladder behavior: H/h and hint button reveal clues without flipping card.
 17. Documentation governance via AGENTS.md and inputs workflow.

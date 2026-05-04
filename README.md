@@ -77,7 +77,8 @@ Progress is stored in **localStorage** during your session. To persist it across
 Auto-export cadence is configurable from the right rail: set the number of completed cards for each automatic export.
 This threshold is saved in local storage and included in export/import JSON.
 
-Left dashboard deck stacks and right-rail control groups are collapsible to preserve flashcard space.
+Left category deck stacks and right-rail control groups are collapsible to preserve flashcard space.
+Top stats include Total(core, optional) so you can see the breakdown at a glance.
 
 ## Reading long content
 
@@ -112,6 +113,17 @@ To add a new deck:
 | **New** | Not yet reviewed |
 | **Review** | Needs more practice |
 | **Strong** | Confident — well understood |
+
+## Swipe gestures (touch)
+
+| Gesture | Action |
+|---------|--------|
+| Swipe ↑ | Mark Strong |
+| Swipe ↓ | Mark Review |
+| Swipe ← | Previous card |
+| Swipe → | Skip card |
+
+Swipe support is active across the center study area for iPad/tablet-friendly operation.
 
 ## Keyboard shortcuts
 

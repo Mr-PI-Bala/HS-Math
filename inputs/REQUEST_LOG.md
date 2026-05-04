@@ -39,3 +39,6 @@
 30. [Implemented] Keep Category/Card Filter/Current State controls aligned in a dedicated top toolbar above flashcards.
 31. [Implemented] Convert left dashboard deck cards into collapsible stacks (only active deck open by default; others collapsed).
 32. [Implemented] Make auto-export threshold user-editable and persist it across local save/export/import.
+33. [Implemented] Add swipe gestures on center study area (up=strong, down=review, left=previous, right=skip).
+34. [Implemented] Split legend into Swipe Gestures and Keyboard Commands sections.
+35. [Implemented] Add Core/Optional breakdown beside Total in top stats row and remove redundant left Dashboard block.

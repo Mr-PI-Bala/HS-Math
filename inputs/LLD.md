@@ -53,6 +53,10 @@ Back:
 
 ## Interaction Handlers
 - Click card: flip reveal/hide
+- Swipe Up: strong
+- Swipe Down: review
+- Swipe Left: previous card
+- Swipe Right: skip
 - Hint button / H: reveal next hint level
 - Strong/Review: mark and advance
 - Right Arrow: skip
@@ -82,7 +86,7 @@ Back:
 ## Undo Model
 - actionHistory stores mark/skip actions
 - undoLastAction() reverts card status and deck-level counters
-- re-renders queue and dashboard after rollback
+- re-renders queue and sidebar after rollback
 
 ## Hand-Crafted Card Fields
 - steps: string[]
