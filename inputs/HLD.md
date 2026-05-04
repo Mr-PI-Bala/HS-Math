@@ -22,12 +22,14 @@
 - Card status persistence
 - Deck-level action counters
 - Undo support for recent action
-- Auto-export action threshold handling
+- Auto-export action threshold handling (user-configurable cadence)
 
 4. UX and Navigation
 - Sidebar dashboard for category counts
-- Toolbar with current category + filters
-- Right rail for grouped controls and legend
+- Toolbar with aligned category + card filter + current state above flashcards
+- Left and right rails consume full workspace height below top stats row
+- Left sidebar deck cards are collapsible stacks (active deck open by default)
+- Right rail for grouped controls and legend with collapsible sections
 - Keyboard mapping for high-speed operation
 - Hint interaction policy where hints do not force answer reveal
 

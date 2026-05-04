@@ -74,6 +74,11 @@ Progress is stored in **localStorage** during your session. To persist it across
 2. Copy/move it to `cfg/progress.json` and commit
 3. On a new device, click **⬆ Import** and pick `cfg/progress.json`
 
+Auto-export cadence is configurable from the right rail: set the number of completed cards for each automatic export.
+This threshold is saved in local storage and included in export/import JSON.
+
+Left dashboard deck stacks and right-rail control groups are collapsible to preserve flashcard space.
+
 ## Reading long content
 
 Hints, answers, examples, steps, and tips are visually clamped inside the flashcard for layout stability.

@@ -39,7 +39,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 7. Previous/next/skip navigation.
 8. Hint ladder on question side with 3 progressive levels.
 9. Answer side with steps + tip + real-world example.
-10. Auto-export cadence (every 5 actions, toggleable).
+10. Auto-export cadence (user-defined threshold, toggleable).
 11. Export, import, and clipboard copy JSON controls.
 12. Session controls: End Session (pause) and Reset Progress (clear data).
 13. Keyboard navigation and legend.
@@ -50,6 +50,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 18. Content containment: long text is clamped within card regions with click-to-expand popup.
 19. Compact hint progress badge shown next to hint button.
 20. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
+21. Collapsible deck stacks on left dashboard and collapsible grouped controls on right rail.
 
 ## Category Coverage (Implemented)
 - Algebra

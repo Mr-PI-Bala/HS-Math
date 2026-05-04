@@ -10,7 +10,7 @@
 
 ## Core JS State (index.html)
 - decks[]
-- progressData { cards, deckStats, actionsSinceExport, lastExported }
+- progressData { cards, deckStats, actionsSinceExport, lastExported, autoExportEvery }
 - queue[]
 - queueIdx
 - revealed
@@ -46,6 +46,8 @@ Back:
 ## Layout Density Rules
 - Top toolbar (category/filter/current) rendered as a slim single row above workspace.
 - Left dashboard and right control rail use compact typography and spacing.
+- Left deck list is rendered as collapsible stack cards; active deck stack opens by default.
+- Right rail sections (Legend/Session/Data/Auto Export) are collapsible.
 - Action buttons and keyboard hint row are condensed to preserve vertical card space.
 - Primary layout objective: maximize flashcard viewport area while retaining controls.
 
@@ -75,6 +77,7 @@ Back:
 - copy-export writes JSON to clipboard
 - import parses uploaded JSON and normalizes schema
 - reset clears progressData to defaults
+- autoExportEvery is persisted in localStorage and included in export/import payload
 
 ## Undo Model
 - actionHistory stores mark/skip actions

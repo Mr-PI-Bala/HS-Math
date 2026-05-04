@@ -4,9 +4,13 @@
 ### Fixed
 - ArrowLeft keyboard shortcut now navigates to previous card (was not wired).
 - ArrowUp/ArrowDown now mark strong/review in one keypress (no longer require reveal first).
+- Reduced overlap between top-right card status badge (NEW/REVIEW/STRONG) and hint progress indicator.
 ### Updated
 - Keyboard legend uses compact Unicode symbols (→ ← ↑ ↓ ⇧ Spc Esc ⌫) to save space.
 - Right rail sections (Legend, Session Controls, Data Controls) are now collapsible; Legend open by default, others collapsed.
+- Top controls are aligned as Category / Card Filter / Current State directly above flashcard workspace.
+- Left dashboard deck cards now use collapsible stack sections; active deck remains open by default.
+- Auto-export cadence now uses a user-entered card threshold and persists through local save/export/import.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

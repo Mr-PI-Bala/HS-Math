@@ -32,7 +32,10 @@
 23. [Implemented] Hint slot click reveals next hint in sequence (same behavior as H), while out-of-order clicks keep hidden behavior.
 24. [Implemented] Document UX stability principle: keep context/perspective stable and preserve flashcard as dominant area.
 25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.
-25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.
 26. [Implemented] Fix ArrowLeft (wire previous card) and ArrowUp/ArrowDown (one-press mark without requiring reveal first).
 27. [Implemented] Compact keyboard legend using Unicode symbols (→←↑↓⇧ Spc Esc ⌫).
 28. [Implemented] Collapsible right-rail sections (Legend open by default; Session/Data Controls collapsed).
+29. [Implemented] Reduce NEW/REVIEW badge overlap with hint progress badge by nudging badge up/reducing size and nudging hint counter down.
+30. [Implemented] Keep Category/Card Filter/Current State controls aligned in a dedicated top toolbar above flashcards.
+31. [Implemented] Convert left dashboard deck cards into collapsible stacks (only active deck open by default; others collapsed).
+32. [Implemented] Make auto-export threshold user-editable and persist it across local save/export/import.
