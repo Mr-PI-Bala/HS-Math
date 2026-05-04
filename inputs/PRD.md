@@ -40,6 +40,8 @@ Provide a high-impact, low-friction study tool for middle school and high school
 15. Multiple deck families: HS, AP, MS, and bonus fun/tricks.
 16. Hint ladder behavior: H/h and hint button reveal clues without flipping card.
 17. Documentation governance via AGENTS.md and inputs workflow.
+18. Content containment: long text is clamped within card regions with click-to-expand popup.
+19. Compact hint progress badge shown next to hint button.
 
 ## Category Coverage (Implemented)
 - Algebra

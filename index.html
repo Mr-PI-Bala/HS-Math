@@ -386,6 +386,22 @@
       gap: 0.4rem;
     }
 
+    .hint-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hint-progress {
+      font-size: 0.68rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.14rem 0.38rem;
+      background: #fff;
+      white-space: nowrap;
+    }
+
     .hint-title {
       font-size: 0.78rem;
       color: var(--muted);
@@ -420,6 +436,8 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 58px;
+      cursor: zoom-in;
+      overflow: hidden;
     }
 
     .hint-slot.revealed {
@@ -432,6 +450,16 @@
       font-weight: 700;
       margin-right: 0.3rem;
       color: #3f52c5;
+      flex: 0 0 auto;
+    }
+
+    .hint-slot .hint-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     .card-hint {
@@ -452,9 +480,15 @@
 
     .card-back-answer {
       font-size: 1.08rem;
-      white-space: pre-line;
+      white-space: normal;
       line-height: 1.65;
       width: 100%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 6;
+      text-overflow: ellipsis;
+      cursor: zoom-in;
     }
 
     .card-example {
@@ -465,6 +499,12 @@
       font-size: 0.86rem;
       line-height: 1.4;
       color: var(--muted);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      text-overflow: ellipsis;
+      cursor: zoom-in;
     }
 
     .card-example strong {
@@ -514,6 +554,17 @@
       display: grid;
       gap: 0.35rem;
       padding-right: 0.15rem;
+      overflow: hidden;
+      max-height: 9.6rem;
+      cursor: zoom-in;
+    }
+
+    .card-steps li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     .card-tip {
@@ -524,6 +575,12 @@
       font-weight: 700;
       color: var(--text);
       text-align: right;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      text-overflow: ellipsis;
+      cursor: zoom-in;
     }
 
     .optional-note {
@@ -750,6 +807,61 @@
     #toast.show { transform: translateX(-50%) translateY(0); }
     #import-input { display: none; }
 
+    .expand-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 26, 52, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 120;
+    }
+
+    .expand-overlay.open { display: flex; }
+
+    .expand-panel {
+      width: min(760px, 96vw);
+      max-height: min(84vh, 760px);
+      overflow: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.24);
+      padding: 0.85rem;
+    }
+
+    .expand-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .expand-head h4 {
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .expand-close {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.26rem 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .expand-content {
+      white-space: pre-wrap;
+      line-height: 1.55;
+      color: var(--text);
+      font-size: 0.94rem;
+    }
+
     @media (max-width: 980px) {
       .study-layout { grid-template-columns: 1fr; }
       .sidebar {
@@ -880,7 +992,10 @@
                     <div class="card-front-right">
                       <div class="hint-head">
                         <span class="hint-title">Hint Ladder</span>
-                        <button class="hint-btn" id="btn-hint" type="button">Hint (H)</button>
+                        <span class="hint-controls">
+                          <button class="hint-btn" id="btn-hint" type="button">Hint (H)</button>
+                          <span id="hint-progress" class="hint-progress">0/3</span>
+                        </span>
                       </div>
                       <div class="hint-slot" id="hint-slot-1"><span class="hint-level">1.</span><span>Simple hint hidden</span></div>
                       <div class="hint-slot" id="hint-slot-2"><span class="hint-level">2.</span><span>Middle hint hidden</span></div>
@@ -967,6 +1082,15 @@
 </div>
 
 <div id="toast"></div>
+<div id="expand-overlay" class="expand-overlay" aria-hidden="true">
+  <div class="expand-panel" role="dialog" aria-modal="true" aria-labelledby="expand-title">
+    <div class="expand-head">
+      <h4 id="expand-title">Details</h4>
+      <button id="expand-close" class="expand-close" type="button">Close</button>
+    </div>
+    <div id="expand-content" class="expand-content"></div>
+  </div>
+</div>
 
 <script>
 const STORAGE_KEY = 'hsMath_progress_v2';
@@ -1000,6 +1124,10 @@ const optionalToggle = $('toggle-optional-cards');
 const sessionEndedState = $('session-ended-state');
 const currentCategoryChip = $('current-category-chip');
 const hintSlots = [$('hint-slot-1'), $('hint-slot-2'), $('hint-slot-3')];
+const hintProgress = $('hint-progress');
+const expandOverlay = $('expand-overlay');
+const expandTitle = $('expand-title');
+const expandContent = $('expand-content');
 
 function createEmptyProgress() {
   return {
@@ -1197,6 +1325,7 @@ function renderCard() {
   $('card-deck-lbl-b').textContent = deckLabel;
   renderCardLearningAids(card);
   renderHintSlots(card);
+  wireExpandableAreas(card);
 
   const counter = `${queueIdx + 1} / ${queue.length}`;
   $('card-counter').textContent = counter;
@@ -1303,8 +1432,11 @@ function renderHintSlots(card) {
     const level = index + 1;
     const text = hintLevel >= level ? hints[index] : (level === 1 ? 'Simple hint hidden' : level === 2 ? 'Middle hint hidden' : 'Detailed hint hidden');
     slot.classList.toggle('revealed', hintLevel >= level);
-    slot.innerHTML = '<span class="hint-level">' + level + '.</span><span>' + escapeHtml(text) + '</span>';
+    slot.innerHTML = '<span class="hint-level">' + level + '.</span><span class="hint-text">' + escapeHtml(text) + '</span>';
+    slot.dataset.fullText = text;
+    slot.dataset.expandTitle = 'Hint level ' + level;
   });
+  hintProgress.textContent = hintLevel + '/3';
 }
 
 function revealHint() {
@@ -1324,6 +1456,49 @@ function revealHint() {
   if (hintLevel === 3) {
     showToast('Hint level 3 revealed. All hints shown.');
   }
+}
+
+function wireExpandableAreas(card) {
+  const answerEl = $('card-back');
+  const exampleEl = $('card-example');
+  const stepsEl = $('card-steps');
+  const tipEl = $('card-tip');
+
+  answerEl.dataset.fullText = card.back || '';
+  answerEl.dataset.expandTitle = 'Answer';
+
+  exampleEl.dataset.fullText = deriveExampleFromCard(card);
+  exampleEl.dataset.expandTitle = 'Real-world example';
+
+  const steps = deriveStepsFromCard(card);
+  stepsEl.dataset.fullText = steps.map((s, i) => (i + 1) + '. ' + s).join('\n');
+  stepsEl.dataset.expandTitle = 'Steps to arrive at answer';
+
+  tipEl.dataset.fullText = deriveTipFromCard(card);
+  tipEl.dataset.expandTitle = 'Memory tip';
+}
+
+function openExpandPanel(title, text) {
+  expandTitle.textContent = title;
+  expandContent.textContent = text;
+  expandOverlay.classList.add('open');
+  expandOverlay.setAttribute('aria-hidden', 'false');
+}
+
+function closeExpandPanel() {
+  expandOverlay.classList.remove('open');
+  expandOverlay.setAttribute('aria-hidden', 'true');
+}
+
+function bindExpandable(target, fallbackTitle) {
+  target.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const text = target.dataset.fullText || target.textContent || '';
+    const title = target.dataset.expandTitle || fallbackTitle;
+    if (!text.trim()) return;
+    openExpandPanel(title, text);
+  });
 }
 
 function renderCardLearningAids(card) {
@@ -1617,6 +1792,17 @@ $('btn-hint').addEventListener('click', e => {
 $('btn-restart').addEventListener('click', buildQueue);
 $('btn-export-done').addEventListener('click', exportProgress);
 
+hintSlots.forEach((slot, index) => bindExpandable(slot, 'Hint level ' + (index + 1)));
+bindExpandable($('card-back'), 'Answer');
+bindExpandable($('card-example'), 'Real-world example');
+bindExpandable($('card-steps'), 'Steps to arrive at answer');
+bindExpandable($('card-tip'), 'Memory tip');
+
+$('expand-close').addEventListener('click', closeExpandPanel);
+expandOverlay.addEventListener('click', e => {
+  if (e.target === expandOverlay) closeExpandPanel();
+});
+
 deckFilter.addEventListener('change', buildQueue);
 statusFilter.addEventListener('change', buildQueue);
 
@@ -1624,6 +1810,12 @@ document.addEventListener('keydown', e => {
   const tag = e.target.tagName;
   const isTypingField = tag === 'TEXTAREA' || e.target.isContentEditable || (tag === 'INPUT' && e.target.type !== 'file');
   if (isTypingField) return;
+
+  if (expandOverlay.classList.contains('open') && e.key === 'Escape') {
+    e.preventDefault();
+    closeExpandPanel();
+    return;
+  }
 
   if (e.key === 'h' || e.key === 'H') {
     e.preventDefault();
@@ -1666,12 +1858,6 @@ document.addEventListener('keydown', e => {
   }
 
   if (e.key === 'ArrowDown') {
-      if (e.key === 'h' || e.key === 'H') {
-        e.preventDefault();
-        revealHint();
-        return;
-      }
-
     e.preventDefault();
     markCard('review');
     return;

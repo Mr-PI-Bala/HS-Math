@@ -32,6 +32,8 @@ Front:
 - Hint ladder panel with 3 slots
 - Hint button / H key progression
 - Hint reveals are non-flip actions and stay on question side
+- Compact hint progress indicator near hint button
+- Hint slots are clamped and expandable on click
 
 Back:
 - Question recap
@@ -39,6 +41,7 @@ Back:
 - Real-world example footer
 - Steps list on right panel
 - Bold memory tip at bottom-right
+- Answer/example/steps/tip are clamped with click-to-expand popup
 
 ## Interaction Handlers
 - Click card: flip reveal/hide
@@ -53,6 +56,12 @@ Back:
 - Space: reveal then next
 - Escape: hide answer
 - Backspace: undo last action
+- Esc closes expanded popup first, then fallback card-hide behavior
+
+## Overflow Expansion Model
+- Clamped content regions keep card layout stable.
+- Clicking a clamped region opens modal-style detail panel.
+- Detail panel closes on outside click or Escape.
 
 ## Persistence and Export/Import
 - saveProgress() writes to localStorage

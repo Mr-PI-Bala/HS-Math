@@ -26,3 +26,5 @@
 17. [Implemented] Improve answer-card layout overflow and spacing hygiene.
 18. [Implemented] Add project instruction file and reusable hygiene checklist template.
 19. [Implemented] Add README PR hygiene checklist for enforcement.
+20. [Implemented] Clamp long hint/answer/example/steps/tip text inside card boxes with expandable popup details.
+21. [Implemented] Add compact hint progress indicator next to hint button.

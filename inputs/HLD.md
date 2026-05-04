@@ -36,6 +36,7 @@
 - Front-side hint ladder: 3 progressive hints
 - Real-world example rendering under answer
 - Falls back to generated guidance when handcrafted fields absent
+- Overflow-safe clamped presentation with click-to-expand detail panel
 
 ## Security and Privacy
 - No auth

@@ -72,6 +72,14 @@ Progress is stored in **localStorage** during your session. To persist it across
 2. Copy/move it to `cfg/progress.json` and commit
 3. On a new device, click **⬆ Import** and pick `cfg/progress.json`
 
+## Reading long content
+
+Hints, answers, examples, steps, and tips are visually clamped inside the flashcard for layout stability.
+
+- If text is long, it shows an ellipsis-style preview.
+- Click that region to open an expanded popup.
+- Click outside popup or press `Esc` to close.
+
 ## Adding or editing cards
 
 Edit any file in `cfg/decks/` directly — they're plain JSON:

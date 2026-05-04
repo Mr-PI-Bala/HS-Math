@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased] - 2026-05-04
+## [v1.0.3] - 2026-05-04
 ### Added
 - AGENTS.md with required project instruction workflow.
 - inputs/HYGIENE_CHECKLIST_TEMPLATE.md for reuse across projects.
@@ -11,6 +11,9 @@
 - Hint button no longer bubbles click to card flip (question side remains visible while revealing hints).
 - Hint exhaustion now shows explicit guidance instead of repeated reveal behavior.
 - Answer card right-panel overflow/spacing cleaned up for better readability.
+- Hint/answer/example/steps/tip content now stays inside card boxes with clamped previews.
+- Click-to-expand popup added for long content regions with close on outside click/Escape.
+- Added compact hint progress indicator next to hint button.
 
 ## [v1.0.1] - 2026-05-04
 ### Added
