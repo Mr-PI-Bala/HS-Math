@@ -695,6 +695,56 @@
       flex-wrap: wrap;
     }
 
+    .done-deck-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.1rem;
+    }
+
+    .done-deck-nav .btn-nav {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .done-deck-nav .btn-nav:hover { background: #f0f4ff; }
+    .done-deck-nav .btn-nav:disabled { opacity: 0.45; cursor: default; }
+
+    .done-deck-jump {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: center;
+    }
+
+    .btn-deck-jump {
+      border: 1px solid var(--border);
+      background: #fafbff;
+      border-radius: 8px;
+      padding: 0.32rem 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .btn-deck-jump.active {
+      border-color: var(--primary);
+      background: #eff3ff;
+      color: var(--primary);
+    }
+
+    .btn-deck-jump:hover { background: #e8ecff; }
+
     #keyboard-hint {
       font-size: 0.64rem;
       color: var(--muted);
@@ -1051,6 +1101,12 @@
                 <button class="btn btn-reveal" id="btn-restart">Restart queue</button>
                 <button class="btn btn-skip" id="btn-export-done">Export progress</button>
               </div>
+              <div class="done-deck-nav">
+                <button class="btn-nav" id="btn-prev-deck">&#8592; Prev deck</button>
+                <span id="done-deck-label" style="font-size:0.78rem;color:var(--muted);"></span>
+                <button class="btn-nav" id="btn-next-deck">Next deck &#8594;</button>
+              </div>
+              <div class="done-deck-jump" id="done-deck-jump"></div>
             </div>
 
             <div id="session-ended-state" style="display:none" class="save-guide">
@@ -1413,6 +1469,7 @@ function renderCard() {
     emptyState.style.display = 'none';
     doneState.style.display = 'block';
     progressBar.style.width = '100%';
+    renderDoneDecks();
     return;
   }
 
@@ -1930,6 +1987,42 @@ $('btn-hint').addEventListener('click', e => {
   revealHint();
 });
 $('btn-restart').addEventListener('click', buildQueue);
+
+$('btn-prev-deck').addEventListener('click', () => navigateDeck(-1));
+$('btn-next-deck').addEventListener('click', () => navigateDeck(1));
+
+function getDeckOptions() {
+  return [{ id: 'all', name: 'All Decks' }, ...decks.map(d => ({ id: d.id, name: d.deck }))];
+}
+
+function navigateDeck(step) {
+  const options = getDeckOptions();
+  const currentIndex = options.findIndex(o => o.id === deckFilter.value);
+  const nextIndex = Math.max(0, Math.min(options.length - 1, currentIndex + step));
+  deckFilter.value = options[nextIndex].id;
+  buildQueue();
+}
+
+function renderDoneDecks() {
+  const options = getDeckOptions();
+  const currentId = deckFilter.value;
+  const currentIndex = options.findIndex(o => o.id === currentId);
+
+  $('done-deck-label').textContent = options[currentIndex]?.name || '';
+  $('btn-prev-deck').disabled = currentIndex <= 0;
+  $('btn-next-deck').disabled = currentIndex >= options.length - 1;
+
+  $('done-deck-jump').innerHTML = options.map(o =>
+    `<button class="btn-deck-jump ${o.id === currentId ? 'active' : ''}" data-deck-id="${o.id}">${o.name}</button>`
+  ).join('');
+
+  $('done-deck-jump').querySelectorAll('.btn-deck-jump').forEach(btn => {
+    btn.addEventListener('click', () => {
+      deckFilter.value = btn.dataset.deckId;
+      buildQueue();
+    });
+  });
+}
 
 // Collapsible rail sections
 document.querySelectorAll('.rail-group .rail-head').forEach(h3 => {
