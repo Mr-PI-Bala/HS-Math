@@ -1,0 +1,18 @@
+{
+  "deck": "Trigonometry",
+  "description": "Trig ratios, identities, and the unit circle",
+  "cards": [
+    { "id": "trig-001", "front": "SOH-CAH-TOA", "back": "sin θ = Opposite / Hypotenuse\ncos θ = Adjacent / Hypotenuse\ntan θ = Opposite / Adjacent" },
+    { "id": "trig-002", "front": "Reciprocal trig functions", "back": "csc θ = 1/sin θ\nsec θ = 1/cos θ\ncot θ = 1/tan θ" },
+    { "id": "trig-003", "front": "Pythagorean Identity", "back": "sin²θ + cos²θ = 1\n\nDerived forms:\n• 1 + tan²θ = sec²θ\n• 1 + cot²θ = csc²θ" },
+    { "id": "trig-004", "front": "Unit circle: sin and cos values at 0°, 30°, 45°, 60°, 90°", "back": "0° → (1, 0)\n30° → (√3/2, 1/2)\n45° → (√2/2, √2/2)\n60° → (1/2, √3/2)\n90° → (0, 1)\n\n(cos θ, sin θ)" },
+    { "id": "trig-005", "front": "Signs of trig functions by quadrant (ASTC)", "back": "All Students Take Calculus\n• Q1: All positive\n• Q2: Sin positive\n• Q3: Tan positive\n• Q4: Cos positive" },
+    { "id": "trig-006", "front": "Law of Sines", "back": "a/sin A = b/sin B = c/sin C\n\nUse when: AAS, ASA, or SSA (ambiguous case)" },
+    { "id": "trig-007", "front": "Law of Cosines", "back": "c² = a² + b² − 2ab·cos C\n\nUse when: SAS or SSS" },
+    { "id": "trig-008", "front": "Double angle formulas", "back": "sin 2θ = 2 sin θ cos θ\ncos 2θ = cos²θ − sin²θ\n       = 1 − 2sin²θ\n       = 2cos²θ − 1" },
+    { "id": "trig-009", "front": "Amplitude, period, and phase shift of y = A·sin(Bx + C) + D", "back": "Amplitude = |A|\nPeriod = 2π / |B|\nPhase shift = −C / B\nVertical shift = D" },
+    { "id": "trig-010", "front": "tan θ in terms of sin and cos", "back": "tan θ = sin θ / cos θ" },
+    { "id": "trig-011", "front": "Angle conversions: degrees ↔ radians", "back": "radians = degrees × (π/180)\ndegrees = radians × (180/π)\n\nKey: 180° = π rad" },
+    { "id": "trig-012", "front": "Arc length formula", "back": "s = rθ\n\nr = radius, θ = central angle in radians" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "deck": "AP Algebra",
+  "description": "Advanced algebra fluency for honors/AP-prep pathways",
+  "cards": [
+    { "id": "apa-001", "front": "Complex number i definition", "back": "i is defined by i^2 = -1." },
+    { "id": "apa-002", "front": "Conjugate of a+bi", "back": "Conjugate is a-bi. Product with conjugate gives a^2+b^2." },
+    { "id": "apa-003", "front": "Rationalizing denominator with complex numbers", "back": "Multiply numerator and denominator by conjugate of denominator." },
+    { "id": "apa-004", "front": "Polynomial remainder theorem", "back": "Remainder of dividing f(x) by (x-c) is f(c)." },
+    { "id": "apa-005", "front": "Factor theorem", "back": "(x-c) is factor of f(x) iff f(c)=0." },
+    { "id": "apa-006", "front": "Rational root candidates", "back": "Possible rational roots are factors of constant term over factors of leading coefficient." },
+    { "id": "apa-007", "front": "End behavior from degree and leading coefficient", "back": "Even degree: both ends same direction. Odd degree: ends opposite. Leading sign sets up/down direction." },
+    { "id": "apa-008", "front": "Composition and inverse check", "back": "Functions are inverses if f(g(x))=x and g(f(x))=x on valid domains." },
+    { "id": "apa-009", "front": "Log equation solving strategy", "back": "Condense logs first, rewrite in exponential form, solve, then check domain restrictions." },
+    { "id": "apa-010", "front": "Exponential growth model", "back": "y = a*b^t with b>1 models multiplicative growth." },
+    { "id": "apa-011", "front": "Exponential decay model", "back": "y = a*b^t with 0<b<1 models decay." },
+    { "id": "apa-012", "front": "Difference quotient", "back": "[f(x+h)-f(x)]/h measures average rate and leads to derivative in calculus." },
+    { "id": "apa-013", "front": "Piecewise function continuity check", "back": "Compare left and right limits at boundary and ensure they equal function value." },
+    { "id": "apa-014", "front": "Asymptote from transformed reciprocal", "back": "For y=a/(x-h)+k, vertical asymptote x=h and horizontal asymptote y=k." },
+    { "id": "apa-015", "front": "Sequence recursive vs explicit", "back": "Recursive uses prior term(s); explicit gives direct formula for nth term." },
+    { "id": "apa-016", "front": "Binomial coefficient interpretation", "back": "C(n,k) counts ways to choose k items from n without order." }
+  ]
+}

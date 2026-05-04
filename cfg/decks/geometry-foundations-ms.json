@@ -1,0 +1,20 @@
+{
+  "deck": "Geometry Foundations (MS)",
+  "description": "Middle school geometry, measurement, and visual reasoning",
+  "cards": [
+    { "id": "msg-001", "front": "Perimeter definition", "back": "Perimeter is total distance around a shape." },
+    { "id": "msg-002", "front": "Area of rectangle", "back": "A = length * width." },
+    { "id": "msg-003", "front": "Area of triangle", "back": "A = (1/2) * base * height." },
+    { "id": "msg-004", "front": "Area of circle", "back": "A = pi*r^2." },
+    { "id": "msg-005", "front": "Circumference of circle", "back": "C = 2*pi*r or C = pi*d." },
+    { "id": "msg-006", "front": "Volume of rectangular prism", "back": "V = length * width * height." },
+    { "id": "msg-007", "front": "Surface area idea", "back": "Surface area is sum of areas of all outer faces." },
+    { "id": "msg-008", "front": "Types of angles", "back": "Acute <90, right =90, obtuse between 90 and 180, straight =180." },
+    { "id": "msg-009", "front": "Complementary vs supplementary", "back": "Complementary sum to 90. Supplementary sum to 180." },
+    { "id": "msg-010", "front": "Triangle angle sum", "back": "Interior angles of triangle sum to 180 degrees." },
+    { "id": "msg-011", "front": "Pythagorean theorem preview", "back": "In a right triangle, a^2 + b^2 = c^2." },
+    { "id": "msg-012", "front": "Similar figures", "back": "Same shape with proportional side lengths and equal corresponding angles." },
+    { "id": "msg-013", "front": "Transformations basics", "back": "Translations slide, reflections flip, rotations turn, dilations resize." },
+    { "id": "msg-014", "front": "Scale factor", "back": "Scale factor multiplies each length in a dilation." }
+  ]
+}

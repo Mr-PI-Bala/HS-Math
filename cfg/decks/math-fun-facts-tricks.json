@@ -1,0 +1,22 @@
+{
+  "deck": "Math Fun Facts and Tricks",
+  "description": "Bonus mental-math patterns and interesting facts",
+  "cards": [
+    { "id": "fun-001", "front": "Divisibility by 3 test", "back": "A number is divisible by 3 if sum of its digits is divisible by 3." },
+    { "id": "fun-002", "front": "Divisibility by 9 test", "back": "A number is divisible by 9 if sum of its digits is divisible by 9." },
+    { "id": "fun-003", "front": "Divisibility by 11 trick", "back": "Difference between alternating digit sums is multiple of 11 (including 0)." },
+    { "id": "fun-004", "front": "Square numbers ending in 5", "back": "For n ending in 5, square by multiplying first part by next integer then append 25." },
+    { "id": "fun-005", "front": "Multiply by 11 trick (2-digit)", "back": "For ab, result is a (a+b) b with carry if needed." },
+    { "id": "fun-006", "front": "Why 0! = 1", "back": "It keeps factorial pattern consistent with n! = n*(n-1)! and combinatorics formulas." },
+    { "id": "fun-007", "front": "Pi is irrational", "back": "Pi cannot be written as a ratio of integers and has non-repeating infinite decimals." },
+    { "id": "fun-008", "front": "Prime numbers are infinite", "back": "Euclid proved there are infinitely many primes." },
+    { "id": "fun-009", "front": "Casting out nines check", "back": "Digit sums mod 9 can quickly check arithmetic for likely mistakes." },
+    { "id": "fun-010", "front": "Power of two benchmarks", "back": "2^10 is 1024, close to 1000; useful for quick estimates." },
+    { "id": "fun-011", "front": "Sum of first n integers", "back": "1+2+...+n = n(n+1)/2." },
+    { "id": "fun-012", "front": "Sum of first n odd numbers", "back": "1+3+5+...+(2n-1) = n^2." },
+    { "id": "fun-013", "front": "Digital root idea", "back": "Repeatedly sum digits until one digit remains; useful for mod 9 patterns." },
+    { "id": "fun-014", "front": "Fibonacci quick fact", "back": "Ratio of consecutive Fibonacci numbers approaches golden ratio about 1.618." },
+    { "id": "fun-015", "front": "90-degree rotation rule on coordinate plane", "back": "Counterclockwise around origin: (x,y) -> (-y,x)." },
+    { "id": "fun-016", "front": "Percent to fraction shortcut", "back": "x percent means x/100; reduce to simplest terms." }
+  ]
+}

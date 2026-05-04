@@ -1,0 +1,21 @@
+{
+  "deck": "Geometry",
+  "description": "Shapes, proofs, and coordinate geometry",
+  "cards": [
+    { "id": "geo-001", "front": "Pythagorean Theorem", "back": "a² + b² = c²\n\nc is the hypotenuse (opposite the right angle)" },
+    { "id": "geo-002", "front": "Area formulas: triangle, rectangle, circle, trapezoid", "back": "• Triangle: A = ½bh\n• Rectangle: A = lw\n• Circle: A = πr²\n• Trapezoid: A = ½(b₁+b₂)h" },
+    { "id": "geo-003", "front": "Circumference of a circle", "back": "C = 2πr = πd" },
+    { "id": "geo-004", "front": "Sum of interior angles of a polygon with n sides", "back": "Sum = (n − 2) × 180°\n\nTriangle: 180°, Quadrilateral: 360°, Pentagon: 540°" },
+    { "id": "geo-005", "front": "Properties of parallel lines cut by a transversal", "back": "• Alternate interior angles: equal\n• Alternate exterior angles: equal\n• Corresponding angles: equal\n• Co-interior (same-side interior): supplementary (sum to 180°)" },
+    { "id": "geo-006", "front": "Triangle congruence postulates", "back": "SSS, SAS, ASA, AAS, HL (right triangles)\n\nNote: SSA and AAA do NOT guarantee congruence" },
+    { "id": "geo-007", "front": "Triangle similarity criteria", "back": "AA (Angle-Angle)\nSAS Similarity\nSSS Similarity" },
+    { "id": "geo-008", "front": "Distance formula between (x₁,y₁) and (x₂,y₂)", "back": "d = √((x₂−x₁)² + (y₂−y₁)²)" },
+    { "id": "geo-009", "front": "Midpoint formula", "back": "M = ((x₁+x₂)/2 , (y₁+y₂)/2)" },
+    { "id": "geo-010", "front": "Equation of a circle with center (h,k) and radius r", "back": "(x−h)² + (y−k)² = r²" },
+    { "id": "geo-011", "front": "Volume formulas: sphere, cylinder, cone, prism", "back": "• Sphere: V = (4/3)πr³\n• Cylinder: V = πr²h\n• Cone: V = (1/3)πr²h\n• Prism: V = Bh  (B = base area)" },
+    { "id": "geo-012", "front": "Surface area of a cylinder", "back": "SA = 2πr² + 2πrh\n\n(two circles + lateral rectangle)" },
+    { "id": "geo-013", "front": "Special right triangles: 45-45-90", "back": "Legs = x,  Hypotenuse = x√2\n\nExample: 1, 1, √2" },
+    { "id": "geo-014", "front": "Special right triangles: 30-60-90", "back": "Short leg = x\nLong leg = x√3\nHypotenuse = 2x\n\nExample: 1, √3, 2" },
+    { "id": "geo-015", "front": "Exterior angle theorem (triangle)", "back": "An exterior angle of a triangle equals the sum of the two non-adjacent interior angles." }
+  ]
+}

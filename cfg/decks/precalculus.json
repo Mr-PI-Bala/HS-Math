@@ -1,0 +1,16 @@
+{
+  "deck": "Pre-Calculus",
+  "description": "Functions, limits, and intro to calculus concepts",
+  "cards": [
+    { "id": "pre-001", "front": "Composition of functions: (f∘g)(x)", "back": "(f∘g)(x) = f(g(x))\n\nApply g first, then f to the result." },
+    { "id": "pre-002", "front": "Inverse function definition", "back": "f⁻¹ is the inverse of f if f(f⁻¹(x)) = x\n\nTo find f⁻¹: swap x and y, then solve for y.\nGraph: reflection over y = x" },
+    { "id": "pre-003", "front": "Even vs Odd functions", "back": "Even: f(−x) = f(x)  [symmetric about y-axis]\nOdd:  f(−x) = −f(x) [symmetric about origin]\n\nNeither: most functions" },
+    { "id": "pre-004", "front": "Vertical and horizontal asymptotes of a rational function", "back": "Vertical: set denominator = 0 (where undefined)\nHorizontal:\n• deg num < deg den → y = 0\n• deg num = deg den → y = leading coefficients ratio\n• deg num > deg den → no horizontal asymptote" },
+    { "id": "pre-005", "front": "Arithmetic sequence: nth term", "back": "aₙ = a₁ + (n−1)d\n\na₁ = first term, d = common difference" },
+    { "id": "pre-006", "front": "Geometric sequence: nth term", "back": "aₙ = a₁ · rⁿ⁻¹\n\na₁ = first term, r = common ratio" },
+    { "id": "pre-007", "front": "Sum of a finite geometric series", "back": "Sₙ = a₁(1 − rⁿ) / (1 − r),  r ≠ 1" },
+    { "id": "pre-008", "front": "Informal definition of a limit", "back": "lim[x→a] f(x) = L means f(x) approaches L as x approaches a, regardless of f(a)." },
+    { "id": "pre-009", "front": "Definition of the derivative (limit definition)", "back": "f′(x) = lim[h→0] [f(x+h) − f(x)] / h" },
+    { "id": "pre-010", "front": "Binomial Theorem — expand (a+b)ⁿ", "back": "(a+b)ⁿ = Σ C(n,k) · aⁿ⁻ᵏ · bᵏ  for k = 0 to n\n\nC(n,k) = n! / (k!(n−k)!)  ← binomial coefficient" }
+  ]
+}

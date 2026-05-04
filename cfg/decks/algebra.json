@@ -1,0 +1,74 @@
+{
+  "deck": "Algebra",
+  "description": "Core algebra concepts for high school",
+  "cards": [
+    {
+      "id": "alg-001",
+      "front": "Quadratic Formula",
+      "back": "x = (−b ± √(b²−4ac)) / 2a\n\nUse when ax² + bx + c = 0",
+      "steps": [
+        "Write equation in standard form ax^2 + bx + c = 0.",
+        "Identify coefficients a, b, and c carefully with signs.",
+        "Compute discriminant b^2 - 4ac first.",
+        "Substitute into x = (-b ± sqrt(discriminant)) / (2a).",
+        "Simplify both plus and minus branches for two solutions."
+      ],
+      "tip": "Tip: Say 'opposite b, plus or minus, square root, over 2a' to lock the structure in memory.",
+      "hints": [
+        "Identify a, b, c from ax^2 + bx + c = 0 before doing any arithmetic.",
+        "Compute b^2 - 4ac first; do not mix signs.",
+        "Plug into (-b ± sqrt(b^2-4ac))/(2a), then evaluate both plus and minus cases."
+      ],
+      "example": "A ball's height is modeled by h(t) = -16t^2 + 48t + 5. The quadratic formula finds when h(t)=0 to estimate when it hits the ground."
+    },
+    {
+      "id": "alg-002",
+      "front": "What is the discriminant, and what does each case mean?",
+      "back": "Δ = b²−4ac\n• Δ > 0 → two real roots\n• Δ = 0 → one real (repeated) root\n• Δ < 0 → no real roots (complex)",
+      "steps": [
+        "From ax^2 + bx + c = 0, calculate Δ = b^2 - 4ac.",
+        "Check sign of Δ: positive, zero, or negative.",
+        "Match sign to root count and type.",
+        "Use result to predict graph x-intercepts before solving fully."
+      ],
+      "tip": "Tip: Positive two, zero one, negative none (real) is the fast root-count chant.",
+      "hints": [
+        "The discriminant uses only b and c along with a in b^2 - 4ac.",
+        "Focus on whether Δ is >0, =0, or <0.",
+        "Map sign to roots: two real, one repeated real, or complex pair."
+      ],
+      "example": "Design software checks the discriminant in trajectory equations to tell whether a path intersects a target at zero, one, or two points."
+    },
+    {
+      "id": "alg-003",
+      "front": "FOIL: expand (a + b)(c + d)",
+      "back": "(a+b)(c+d) = ac + ad + bc + bd\n\nFirst · Outer · Inner · Last",
+      "steps": [
+        "Multiply first terms: a*c.",
+        "Multiply outer terms: a*d.",
+        "Multiply inner terms: b*c.",
+        "Multiply last terms: b*d.",
+        "Add results and combine like terms if possible."
+      ],
+      "tip": "Tip: Trace an X pattern between parentheses to avoid missing the middle products.",
+      "hints": [
+        "Every term in the first parenthesis multiplies every term in the second.",
+        "Track order as First, Outer, Inner, Last.",
+        "After multiplying four products, combine like terms to finish."
+      ],
+      "example": "FOIL is used when expanding revenue or cost models such as (base + fee)(quantity + adjustment) in business spreadsheets."
+    },
+    { "id": "alg-004", "front": "Difference of Squares", "back": "a² − b² = (a + b)(a − b)" },
+    { "id": "alg-005", "front": "Perfect Square Trinomial", "back": "a² + 2ab + b² = (a + b)²\na² − 2ab + b² = (a − b)²" },
+    { "id": "alg-006", "front": "Slope formula given two points (x₁,y₁) and (x₂,y₂)", "back": "m = (y₂ − y₁) / (x₂ − x₁)" },
+    { "id": "alg-007", "front": "Slope-Intercept Form", "back": "y = mx + b\n\nm = slope, b = y-intercept" },
+    { "id": "alg-008", "front": "Point-Slope Form", "back": "y − y₁ = m(x − x₁)\n\nUseful when you know slope and one point" },
+    { "id": "alg-009", "front": "Laws of Exponents: product, quotient, power", "back": "• aᵐ · aⁿ = aᵐ⁺ⁿ\n• aᵐ / aⁿ = aᵐ⁻ⁿ\n• (aᵐ)ⁿ = aᵐⁿ\n• a⁰ = 1\n• a⁻ⁿ = 1/aⁿ" },
+    { "id": "alg-010", "front": "Solve for x: |ax + b| = c", "back": "Split into two equations:\nax + b = c  →  x = (c−b)/a\nax + b = −c  →  x = (−c−b)/a\n\nRemember: c must be ≥ 0" },
+    { "id": "alg-011", "front": "What is a function? (formal definition)", "back": "A relation where each input (x) maps to exactly one output (y).\n\nVertical Line Test: a graph is a function if no vertical line intersects it more than once." },
+    { "id": "alg-012", "front": "Factoring a trinomial: x² + bx + c", "back": "Find two numbers p, q such that:\n• p · q = c\n• p + q = b\n\nThen: x² + bx + c = (x + p)(x + q)" },
+    { "id": "alg-013", "front": "Systems of equations — substitution vs elimination", "back": "Substitution: solve one equation for a variable, substitute into the other.\n\nElimination: multiply equations to cancel a variable when added/subtracted." },
+    { "id": "alg-014", "front": "Logarithm definition", "back": "logₐ(b) = c  ⟺  aᶜ = b\n\nlog₁₀ = log,  logₑ = ln" },
+    { "id": "alg-015", "front": "Log rules", "back": "• log(xy) = log x + log y\n• log(x/y) = log x − log y\n• log(xⁿ) = n·log x\n• Change of base: logₐ x = ln x / ln a" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "deck": "Pre-Algebra (MS)",
+  "description": "Middle school bridge from arithmetic to algebra",
+  "cards": [
+    { "id": "mpa-001", "front": "Variable meaning", "back": "A variable is a symbol representing an unknown or changing value." },
+    { "id": "mpa-002", "front": "Evaluate expression", "back": "Substitute given values for variables, then simplify." },
+    { "id": "mpa-003", "front": "Like terms", "back": "Terms with same variable part and exponent can be combined." },
+    { "id": "mpa-004", "front": "Distributive property", "back": "a(b+c) = ab + ac." },
+    { "id": "mpa-005", "front": "One-step equation solving", "back": "Use inverse operation to isolate variable." },
+    { "id": "mpa-006", "front": "Two-step equation solving", "back": "Undo addition/subtraction first, then multiplication/division." },
+    { "id": "mpa-007", "front": "Inequality flip rule", "back": "When multiplying or dividing by a negative number, reverse inequality sign." },
+    { "id": "mpa-008", "front": "Coordinate plane quadrants", "back": "Quadrant I (+,+), II (-,+), III (-,-), IV (+,-)." },
+    { "id": "mpa-009", "front": "Slope as rate of change", "back": "Slope = rise/run = change in y over change in x." },
+    { "id": "mpa-010", "front": "Function input-output idea", "back": "Each input gives exactly one output." },
+    { "id": "mpa-011", "front": "Pattern to equation", "back": "Use table patterns to identify rule and write algebraic expression." },
+    { "id": "mpa-012", "front": "Simple linear form", "back": "y = mx + b where m is slope and b is y-intercept." },
+    { "id": "mpa-013", "front": "Exponent meaning", "back": "Exponent tells repeated multiplication, e.g., a^3 = a*a*a." },
+    { "id": "mpa-014", "front": "Scientific notation", "back": "Write as a number between 1 and 10 times power of 10." }
+  ]
+}

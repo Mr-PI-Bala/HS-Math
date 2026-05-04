@@ -1,0 +1,17 @@
+{
+  "decks": [
+    { "id": "algebra",     "file": "cfg/decks/algebra.json" },
+    { "id": "ap-algebra", "file": "cfg/decks/ap-algebra.json" },
+    { "id": "geometry",    "file": "cfg/decks/geometry.json" },
+    { "id": "trigonometry","file": "cfg/decks/trigonometry.json" },
+    { "id": "precalculus", "file": "cfg/decks/precalculus.json" },
+    { "id": "ap-calculus-ab", "file": "cfg/decks/ap-calculus-ab.json" },
+    { "id": "ap-calculus-bc", "file": "cfg/decks/ap-calculus-bc.json" },
+    { "id": "statistics-probability", "file": "cfg/decks/statistics-probability.json" },
+    { "id": "financial-algebra", "file": "cfg/decks/financial-algebra.json" },
+    { "id": "middle-school-number-sense-ms", "file": "cfg/decks/middle-school-number-sense-ms.json" },
+    { "id": "pre-algebra-ms", "file": "cfg/decks/pre-algebra-ms.json" },
+    { "id": "geometry-foundations-ms", "file": "cfg/decks/geometry-foundations-ms.json" },
+    { "id": "math-fun-facts-tricks", "file": "cfg/decks/math-fun-facts-tricks.json" }
+  ]
+}

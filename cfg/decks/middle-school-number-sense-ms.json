@@ -1,0 +1,20 @@
+{
+  "deck": "Number Sense (MS)",
+  "description": "Middle school number fluency and proportional reasoning",
+  "cards": [
+    { "id": "mns-001", "front": "Prime number definition", "back": "A prime has exactly two positive factors: 1 and itself." },
+    { "id": "mns-002", "front": "GCF meaning", "back": "Greatest common factor is the largest integer that divides each number." },
+    { "id": "mns-003", "front": "LCM meaning", "back": "Least common multiple is the smallest positive multiple shared by numbers." },
+    { "id": "mns-004", "front": "Equivalent fractions", "back": "Multiply or divide numerator and denominator by same nonzero number." },
+    { "id": "mns-005", "front": "Convert fraction to decimal", "back": "Divide numerator by denominator." },
+    { "id": "mns-006", "front": "Convert decimal to percent", "back": "Multiply decimal by 100 and add percent sign." },
+    { "id": "mns-007", "front": "Ratio vs rate", "back": "Ratio compares two quantities; rate is a ratio with different units." },
+    { "id": "mns-008", "front": "Unit rate", "back": "Rate per one unit, found by division." },
+    { "id": "mns-009", "front": "Proportion setup", "back": "A proportion states two equal ratios, such as a/b = c/d." },
+    { "id": "mns-010", "front": "Percent of a number", "back": "Part = percent * whole, with percent as decimal." },
+    { "id": "mns-011", "front": "Integer addition signs", "back": "Same signs add and keep sign; different signs subtract and keep sign of larger magnitude." },
+    { "id": "mns-012", "front": "Integer multiplication signs", "back": "Same signs give positive, different signs give negative." },
+    { "id": "mns-013", "front": "Absolute value", "back": "Absolute value is distance from zero on number line." },
+    { "id": "mns-014", "front": "Order of operations", "back": "Use parentheses, exponents, multiplication/division, then addition/subtraction left to right." }
+  ]
+}

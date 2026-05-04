@@ -1,0 +1,24 @@
+{
+  "deck": "Statistics and Probability",
+  "description": "Core high school and AP Stats-ready foundations",
+  "cards": [
+    { "id": "stp-001", "front": "Mean vs median", "back": "Mean uses all values and is sensitive to outliers; median is middle value and is more robust." },
+    { "id": "stp-002", "front": "Standard deviation meaning", "back": "Measures typical spread of data around the mean." },
+    { "id": "stp-003", "front": "z-score formula", "back": "z = (x - mean)/standard deviation." },
+    { "id": "stp-004", "front": "Interquartile range", "back": "IQR = Q3 - Q1, spread of middle 50% of data." },
+    { "id": "stp-005", "front": "Outlier rule (boxplot)", "back": "Potential outliers are below Q1 - 1.5*IQR or above Q3 + 1.5*IQR." },
+    { "id": "stp-006", "front": "Basic probability", "back": "P(event) = favorable outcomes / total equally likely outcomes." },
+    { "id": "stp-007", "front": "Complement rule", "back": "P(not A) = 1 - P(A)." },
+    { "id": "stp-008", "front": "Addition rule", "back": "P(A or B) = P(A) + P(B) - P(A and B)." },
+    { "id": "stp-009", "front": "Multiplication rule for independent events", "back": "If A and B are independent, P(A and B) = P(A)*P(B)." },
+    { "id": "stp-010", "front": "Conditional probability", "back": "P(A|B) = P(A and B)/P(B), with P(B)>0." },
+    { "id": "stp-011", "front": "Expected value", "back": "E(X) = sum of each outcome times its probability." },
+    { "id": "stp-012", "front": "Binomial setting criteria", "back": "Fixed number of trials, independent trials, two outcomes, constant success probability." },
+    { "id": "stp-013", "front": "Normal distribution rule of thumb", "back": "About 68% within 1 SD, 95% within 2 SD, 99.7% within 3 SD." },
+    { "id": "stp-014", "front": "Correlation coefficient r", "back": "r measures direction and strength of linear association, from -1 to 1." },
+    { "id": "stp-015", "front": "Correlation does not imply causation", "back": "A relationship between variables does not prove one causes the other." },
+    { "id": "stp-016", "front": "Least squares regression line", "back": "Best-fit line that minimizes sum of squared residuals." },
+    { "id": "stp-017", "front": "Residual definition", "back": "Residual = observed y - predicted y." },
+    { "id": "stp-018", "front": "Sampling bias", "back": "Bias occurs when sample method systematically excludes part of population." }
+  ]
+}

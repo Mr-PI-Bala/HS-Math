@@ -1,0 +1,24 @@
+{
+  "deck": "AP Calculus BC",
+  "description": "AB extensions including advanced integration and series",
+  "cards": [
+    { "id": "cbc-001", "front": "Derivative of inverse trig: arcsin x", "back": "d/dx[arcsin x] = 1/sqrt(1-x^2)." },
+    { "id": "cbc-002", "front": "Logistic differential equation", "back": "dy/dt = ky(1 - y/L), where L is carrying capacity." },
+    { "id": "cbc-003", "front": "Integration by parts formula", "back": "Integral u dv = uv - Integral v du." },
+    { "id": "cbc-004", "front": "Partial fractions use", "back": "Use for rational functions when denominator factors and degree numerator is smaller." },
+    { "id": "cbc-005", "front": "Improper integral test idea", "back": "Evaluate by limit when interval is infinite or integrand is unbounded." },
+    { "id": "cbc-006", "front": "Convergence of geometric series", "back": "Sum a*r^n converges if |r| < 1 and diverges otherwise." },
+    { "id": "cbc-007", "front": "nth-term divergence test", "back": "If lim n->infinity a_n is not 0, series sum a_n diverges." },
+    { "id": "cbc-008", "front": "p-series rule", "back": "Series 1/n^p converges for p>1 and diverges for p<=1." },
+    { "id": "cbc-009", "front": "Alternating series test", "back": "Alternating sum converges if terms decrease in magnitude to 0." },
+    { "id": "cbc-010", "front": "Ratio test", "back": "For series a_n, if lim |a_(n+1)/a_n| = L, then L<1 converges, L>1 diverges." },
+    { "id": "cbc-011", "front": "Radius of convergence", "back": "Distance from center where a power series converges." },
+    { "id": "cbc-012", "front": "Interval of convergence", "back": "Set of x-values where power series converges, including endpoint checks." },
+    { "id": "cbc-013", "front": "Taylor polynomial purpose", "back": "Approximate a function near a center using finite derivative-based polynomial." },
+    { "id": "cbc-014", "front": "Maclaurin series", "back": "Taylor series centered at x = 0." },
+    { "id": "cbc-015", "front": "Known series: e^x", "back": "e^x = sum from n=0 to infinity of x^n / n!." },
+    { "id": "cbc-016", "front": "Known series: sin x and cos x", "back": "sin x = x - x^3/3! + x^5/5! - ... ; cos x = 1 - x^2/2! + x^4/4! - ..." },
+    { "id": "cbc-017", "front": "Error bound idea for alternating series", "back": "Truncation error is at most the magnitude of first omitted term." },
+    { "id": "cbc-018", "front": "Parametric derivative", "back": "If x=x(t), y=y(t), then dy/dx = (dy/dt)/(dx/dt) when dx/dt != 0." }
+  ]
+}

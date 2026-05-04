@@ -1,0 +1,58 @@
+{
+  "deck": "AP Calculus AB",
+  "description": "Essential single-variable calculus AB concepts",
+  "cards": [
+    {
+      "id": "cab-001",
+      "front": "Limit definition idea",
+      "back": "A limit describes the value f(x) approaches as x approaches a target.",
+      "steps": [
+        "Identify the x-value being approached.",
+        "Check left-hand and right-hand behavior near that x-value.",
+        "If both sides approach the same value L, limit equals L.",
+        "If sides differ, the two-sided limit does not exist."
+      ],
+      "tip": "Tip: Limits ask about approach behavior, not necessarily the exact function value at the point.",
+      "hints": [
+        "Look near the x-value from both left and right.",
+        "If left and right approach different values, stop: no two-sided limit.",
+        "If both sides agree, that common value is the limit even if f(a) is undefined."
+      ],
+      "example": "In traffic modeling, speed near a merge point can approach a value even if one sensor reading exactly at that point is missing."
+    },
+    {
+      "id": "cab-002",
+      "front": "Continuity at x = a",
+      "back": "f is continuous at a if f(a) exists, lim x->a f(x) exists, and they are equal.",
+      "steps": [
+        "Verify f(a) is defined.",
+        "Compute left and right limits at x = a to confirm limit exists.",
+        "Compare limit value with f(a).",
+        "Conclude continuity only if all three checks pass."
+      ],
+      "tip": "Tip: Continuity checklist is D-L-E: Defined, Limit exists, Equal values.",
+      "hints": [
+        "Continuity is a three-check process, not one.",
+        "Check value at a and limit at a separately first.",
+        "Only call it continuous when defined, limit exists, and both match."
+      ],
+      "example": "A smooth production-rate graph is continuous when there are no sudden jumps between consecutive time measurements."
+    },
+    { "id": "cab-003", "front": "Derivative definition", "back": "f'(x) = lim h->0 [f(x+h)-f(x)]/h." },
+    { "id": "cab-004", "front": "Power rule", "back": "d/dx[x^n] = n*x^(n-1)." },
+    { "id": "cab-005", "front": "Product rule", "back": "(fg)' = f'g + fg'." },
+    { "id": "cab-006", "front": "Quotient rule", "back": "(f/g)' = (f'g - fg') / g^2." },
+    { "id": "cab-007", "front": "Chain rule", "back": "If y = f(g(x)), then y' = f'(g(x))*g'(x)." },
+    { "id": "cab-008", "front": "Derivative of e^x and ln x", "back": "d/dx[e^x] = e^x and d/dx[ln x] = 1/x for x>0." },
+    { "id": "cab-009", "front": "Implicit differentiation use", "back": "Use when x and y are mixed in one equation and y is not isolated." },
+    { "id": "cab-010", "front": "Critical points", "back": "Critical points occur where f'(x)=0 or f'(x) is undefined and x is in domain." },
+    { "id": "cab-011", "front": "First derivative test", "back": "Sign change of f' from + to - indicates local max; - to + indicates local min." },
+    { "id": "cab-012", "front": "Second derivative and concavity", "back": "f''>0 means concave up, f''<0 means concave down." },
+    { "id": "cab-013", "front": "Mean Value Theorem", "back": "If f is continuous on [a,b] and differentiable on (a,b), some c has f'(c)=[f(b)-f(a)]/(b-a)." },
+    { "id": "cab-014", "front": "Antiderivative notation", "back": "If F'(x)=f(x), then F is an antiderivative of f." },
+    { "id": "cab-015", "front": "Definite integral meaning", "back": "Integral accumulates net signed area between curve and x-axis." },
+    { "id": "cab-016", "front": "Fundamental Theorem Part 1", "back": "If F(x)=integral from a to x of f(t)dt, then F'(x)=f(x)." },
+    { "id": "cab-017", "front": "Fundamental Theorem Part 2", "back": "Integral from a to b of f(x)dx = F(b)-F(a), where F' = f." },
+    { "id": "cab-018", "front": "u-substitution trigger", "back": "Use substitution when integrand includes a function and its derivative pattern." }
+  ]
+}

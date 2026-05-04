@@ -1,0 +1,24 @@
+{
+  "deck": "Financial Algebra",
+  "description": "Core personal finance math for high school",
+  "cards": [
+    { "id": "fin-001", "front": "Simple interest formula", "back": "I = P * r * t where P is principal, r is annual rate, t is time in years." },
+    { "id": "fin-002", "front": "Compound interest formula", "back": "A = P(1 + r/n)^(nt) where n is compounds per year." },
+    { "id": "fin-003", "front": "Continuous compounding formula", "back": "A = Pe^(rt)." },
+    { "id": "fin-004", "front": "Percent increase formula", "back": "New = Original * (1 + rate). For 8% increase, multiply by 1.08." },
+    { "id": "fin-005", "front": "Percent decrease formula", "back": "New = Original * (1 - rate). For 15% discount, multiply by 0.85." },
+    { "id": "fin-006", "front": "Sales tax and tip strategy", "back": "Tax or tip amount = price * rate. Total = price + add-ons." },
+    { "id": "fin-007", "front": "Markup vs markdown", "back": "Markup adds percent to cost. Markdown subtracts percent from listed price." },
+    { "id": "fin-008", "front": "APR vs APY", "back": "APR is nominal yearly rate. APY includes compounding and is effective annual yield." },
+    { "id": "fin-009", "front": "Monthly loan payment idea", "back": "Payment depends on principal, monthly rate, and number of payments. Longer term lowers payment but increases total interest." },
+    { "id": "fin-010", "front": "Debt-to-income ratio", "back": "DTI = monthly debt payments / gross monthly income. Lower DTI usually means lower risk." },
+    { "id": "fin-011", "front": "Budget balance equation", "back": "Net cash flow = income - expenses. Positive flow builds savings." },
+    { "id": "fin-012", "front": "Emergency fund target", "back": "Common target is 3-6 months of essential expenses." },
+    { "id": "fin-013", "front": "Depreciation basics", "back": "Depreciation is value decrease over time. Linear model subtracts same amount each period." },
+    { "id": "fin-014", "front": "Credit card minimum payment risk", "back": "Paying only minimum extends payoff time and greatly increases total interest paid." },
+    { "id": "fin-015", "front": "Break-even point", "back": "Break-even occurs where revenue equals cost. Profit starts after this point." },
+    { "id": "fin-016", "front": "Unit rate in pricing", "back": "Unit price = total cost / quantity. Compare unit prices for best value." },
+    { "id": "fin-017", "front": "Real vs nominal value", "back": "Real value adjusts for inflation; nominal value does not." },
+    { "id": "fin-018", "front": "Rule of 72 estimate", "back": "Approximate doubling time in years is 72 / annual percent rate." }
+  ]
+}
