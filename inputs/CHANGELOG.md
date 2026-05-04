@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased] - 2026-05-04
+### Fixed
+- ArrowLeft keyboard shortcut now navigates to previous card (was not wired).
+- ArrowUp/ArrowDown now mark strong/review in one keypress (no longer require reveal first).
+### Updated
+- Keyboard legend uses compact Unicode symbols (→ ← ↑ ↓ ⇧ Spc Esc ⌫) to save space.
+- Right rail sections (Legend, Session Controls, Data Controls) are now collapsible; Legend open by default, others collapsed.
+
 ## [v1.0.5] - 2026-05-04
 ### Fixed
 - Clicking the next unrevealed hint slot now behaves like H/Hint button and reveals that hint.

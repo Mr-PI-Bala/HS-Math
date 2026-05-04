@@ -743,10 +743,26 @@
 
     .rail-group h3 {
       font-size: 0.7rem;
-      margin-bottom: 0.18rem;
       color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0;
     }
-
+    .rail-group h3 .rail-toggle {
+      font-size: 0.6rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .rail-group.collapsed h3 .rail-toggle { transform: rotate(-90deg); }
+    .rail-group-body {
+      overflow: hidden;
+      transition: max-height 0.2s ease;
+      max-height: 600px;
+    }
+    .rail-group.collapsed .rail-group-body { max-height: 0; }
     .rail-group p {
       font-size: 0.62rem;
       color: var(--muted);
@@ -1056,32 +1072,36 @@
           </div>
 
           <aside class="control-rail">
-            <section class="rail-group">
-              <h3>Legend</h3>
-              <div class="legend-list">
-                <div><strong>Arrow Right:</strong> Skip card</div>
-                <div><strong>Arrow Left:</strong> Previous card</div>
-                <div><strong>Arrow Up:</strong> Mark Strong</div>
-                <div><strong>Arrow Down:</strong> Mark Review</div>
-                <div><strong>Shift + Down:</strong> Next category</div>
-                <div><strong>Shift + Up:</strong> Focus category dropdown</div>
-                <div><strong>Space:</strong> Reveal or next</div>
-                <div><strong>Escape:</strong> Hide answer</div>
-                <div><strong>Backspace:</strong> Undo last mark/skip</div>
-              </div>
+            <section class="rail-group" id="rail-legend">
+              <h3 class="rail-head">Legend <span class="rail-toggle">▼</span></h3>
+              <div class="rail-group-body"><div class="legend-list">
+                <div><strong>→</strong> Skip card</div>
+                <div><strong>←</strong> Previous card</div>
+                <div><strong>↑</strong> Mark Strong</div>
+                <div><strong>↓</strong> Mark Review</div>
+                <div><strong>⇧↓</strong> Next category</div>
+                <div><strong>⇧↑</strong> Focus category</div>
+                <div><strong>Spc</strong> Reveal / Next</div>
+                <div><strong>H</strong> Next hint</div>
+                <div><strong>Esc</strong> Hide answer</div>
+                <div><strong>⌫</strong> Undo last action</div>
+              </div></div>
             </section>
 
-            <section class="rail-group">
-              <h3>Session Controls</h3>
+            <section class="rail-group collapsed" id="rail-session">
+              <h3 class="rail-head">Session Controls <span class="rail-toggle">▼</span></h3>
+              <div class="rail-group-body">
               <p>End pauses this study session view. Reset clears all saved progress data.</p>
               <div class="rail-actions">
                 <button class="rail-btn end" id="btn-end-session" type="button">End Session</button>
                 <button class="rail-btn reset" id="btn-reset" type="button">Reset Progress</button>
               </div>
+              </div>
             </section>
 
-            <section class="rail-group">
-              <h3>Data Controls</h3>
+            <section class="rail-group collapsed" id="rail-data">
+              <h3 class="rail-head">Data Controls <span class="rail-toggle">▼</span></h3>
+              <div class="rail-group-body">
               <p>Export and copy move progress into cfg/progress.json; Import restores saved progress.</p>
               <div class="rail-actions">
                 <button class="rail-btn" id="btn-export" type="button">Export JSON file</button>
@@ -1090,6 +1110,7 @@
               </div>
               <div class="save-guide" style="margin-top:0.65rem; padding:0.65rem;">
                 <label><input type="checkbox" id="auto-export-toggle" checked /> Auto-export every 5 completed cards</label>
+              </div>
               </div>
             </section>
           </aside>
@@ -1830,6 +1851,13 @@ $('btn-hint').addEventListener('click', e => {
   revealHint();
 });
 $('btn-restart').addEventListener('click', buildQueue);
+
+// Collapsible rail sections
+document.querySelectorAll('.rail-group .rail-head').forEach(h3 => {
+  h3.addEventListener('click', () => {
+    h3.closest('.rail-group').classList.toggle('collapsed');
+  });
+});
 $('btn-export-done').addEventListener('click', exportProgress);
 
 hintSlots.forEach((slot, index) => {
@@ -1891,6 +1919,13 @@ document.addEventListener('keydown', e => {
     return;
   }
 
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (queueIdx === 0) { showToast('Already at first card'); return; }
+    previousCard();
+    return;
+  }
+
   if (e.key === 'ArrowRight') {
     e.preventDefault();
     skipCard();
@@ -1899,12 +1934,14 @@ document.addEventListener('keydown', e => {
 
   if (e.key === 'ArrowUp') {
     e.preventDefault();
+    if (!revealed) toggleReveal();
     markCard('strong');
     return;
   }
 
   if (e.key === 'ArrowDown') {
     e.preventDefault();
+    if (!revealed) toggleReveal();
     markCard('review');
     return;
   }

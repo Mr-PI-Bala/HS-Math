@@ -32,3 +32,7 @@
 23. [Implemented] Hint slot click reveals next hint in sequence (same behavior as H), while out-of-order clicks keep hidden behavior.
 24. [Implemented] Document UX stability principle: keep context/perspective stable and preserve flashcard as dominant area.
 25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.
+25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.
+26. [Implemented] Fix ArrowLeft (wire previous card) and ArrowUp/ArrowDown (one-press mark without requiring reveal first).
+27. [Implemented] Compact keyboard legend using Unicode symbols (→←↑↓⇧ Spc Esc ⌫).
+28. [Implemented] Collapsible right-rail sections (Legend open by default; Session/Data Controls collapsed).
