@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.0.4] - 2026-05-04
+### Fixed
+- Reduced left dashboard footprint by roughly 50 percent to prioritize card width.
+- Reduced right control rail footprint by roughly 50 percent to prioritize card width.
+- Condensed top controls into a single skinny row (Category, Card Filter, Current).
+- Condensed bottom action row and keyboard hint strip to preserve vertical card area.
+- Expanded effective flashcard viewport by shifting recovered space to center card area.
+
 ## [v1.0.3] - 2026-05-04
 ### Added
 - AGENTS.md with required project instruction workflow.

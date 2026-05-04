@@ -43,6 +43,12 @@ Back:
 - Bold memory tip at bottom-right
 - Answer/example/steps/tip are clamped with click-to-expand popup
 
+## Layout Density Rules
+- Top toolbar (category/filter/current) rendered as a slim single row above workspace.
+- Left dashboard and right control rail use compact typography and spacing.
+- Action buttons and keyboard hint row are condensed to preserve vertical card space.
+- Primary layout objective: maximize flashcard viewport area while retaining controls.
+
 ## Interaction Handlers
 - Click card: flip reveal/hide
 - Hint button / H: reveal next hint level

@@ -47,6 +47,7 @@
 ## Responsiveness
 - Desktop: left dashboard + main content + right controls
 - Mobile/tablet: collapses to single-column readable flow
+- Dense desktop mode: side rails and control bands are intentionally slim to maximize flashcard display area
 
 ## Operational Baseline
 - Version baseline tags: v1.0, v1.0.1+
