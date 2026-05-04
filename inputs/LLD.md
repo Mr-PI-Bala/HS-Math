@@ -11,6 +11,7 @@
 ## Core JS State (index.html)
 - decks[]
 - progressData { cards, deckStats, actionsSinceExport, lastExported }
+- progressData { cards, deckStats, actionsSinceExport, lastExported, autoExportEvery }
 - queue[]
 - queueIdx
 - revealed
@@ -75,6 +76,7 @@ Back:
 - copy-export writes JSON to clipboard
 - import parses uploaded JSON and normalizes schema
 - reset clears progressData to defaults
+- autoExportEvery interval is user-editable and round-trips through local state/export/import
 
 ## Undo Model
 - actionHistory stores mark/skip actions

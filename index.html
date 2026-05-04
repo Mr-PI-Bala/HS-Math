@@ -704,6 +704,25 @@
       font-weight: 600;
     }
 
+    .auto-export-row {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    .auto-export-row input[type="number"] {
+      width: 56px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.12rem 0.2rem;
+      font-size: 0.68rem;
+      background: #fff;
+      color: var(--text);
+    }
+
     .save-guide-actions {
       display: flex;
       gap: 0.55rem;
@@ -1090,6 +1109,11 @@
               </div>
               <div class="save-guide" style="margin-top:0.65rem; padding:0.65rem;">
                 <label><input type="checkbox" id="auto-export-toggle" checked /> Auto-export every 5 completed cards</label>
+                <div class="auto-export-row">
+                  <span>Every</span>
+                  <input id="auto-export-every" type="number" min="1" step="1" value="5" aria-label="Auto-export interval" />
+                  <span>completed actions</span>
+                </div>
               </div>
             </section>
           </aside>
@@ -1125,6 +1149,7 @@ let includeOptionalCards = false;
 let sessionEnded = false;
 let actionHistory = [];
 let hintLevel = 0;
+const DEFAULT_AUTO_EXPORT_EVERY = 5;
 
 const $ = id => document.getElementById(id);
 const deckFilter = $('deck-filter');
@@ -1153,6 +1178,7 @@ function createEmptyProgress() {
     version: 2,
     lastExported: null,
     actionsSinceExport: 0,
+    autoExportEvery: DEFAULT_AUTO_EXPORT_EVERY,
     cards: {},
     deckStats: {}
   };
@@ -1167,6 +1193,7 @@ function normalizeProgressData(raw) {
       version: raw.version || 2,
       lastExported: raw.lastExported || null,
       actionsSinceExport: Number(raw.actionsSinceExport || 0),
+      autoExportEvery: normalizeAutoExportEvery(raw.autoExportEvery),
       cards: raw.cards,
       deckStats: raw.deckStats && typeof raw.deckStats === 'object' ? raw.deckStats : {}
     };
@@ -1195,6 +1222,12 @@ function saveProgress() {
   } catch {
     showToast('Could not save to local storage');
   }
+}
+
+function normalizeAutoExportEvery(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n) || n < 1) return DEFAULT_AUTO_EXPORT_EVERY;
+  return Math.floor(n);
 }
 
 function getStatus(cardId) {
@@ -1228,7 +1261,8 @@ function recordAction(deckId, type) {
   progressData.actionsSinceExport += 1;
   saveProgress();
 
-  if ($('auto-export-toggle').checked && progressData.actionsSinceExport > 0 && progressData.actionsSinceExport % 5 === 0) {
+  const every = normalizeAutoExportEvery(progressData.autoExportEvery);
+  if ($('auto-export-toggle').checked && progressData.actionsSinceExport > 0 && progressData.actionsSinceExport % every === 0) {
     exportProgress({ auto: true });
   }
 }
@@ -1934,6 +1968,7 @@ function buildExportPayload() {
     version: 2,
     lastExported: progressData.lastExported,
     actionsSinceExport: progressData.actionsSinceExport,
+    autoExportEvery: normalizeAutoExportEvery(progressData.autoExportEvery),
     cards: progressData.cards,
     deckStats: progressData.deckStats
   };
@@ -2012,6 +2047,7 @@ $('import-input').addEventListener('change', e => {
     try {
       const data = JSON.parse(ev.target.result);
       progressData = normalizeProgressData(data);
+      $('auto-export-every').value = String(normalizeAutoExportEvery(progressData.autoExportEvery));
       saveProgress();
       buildQueue();
       renderStats();
@@ -2028,6 +2064,7 @@ $('import-input').addEventListener('change', e => {
 $('btn-reset').addEventListener('click', () => {
   if (!confirm('Reset ALL progress? This cannot be undone.')) return;
   progressData = createEmptyProgress();
+  $('auto-export-every').value = String(DEFAULT_AUTO_EXPORT_EVERY);
   saveProgress();
   buildQueue();
   renderStats();
@@ -2052,6 +2089,14 @@ optionalToggle.addEventListener('change', () => {
   buildQueue();
 });
 
+$('auto-export-every').addEventListener('change', e => {
+  const normalized = normalizeAutoExportEvery(e.target.value);
+  progressData.autoExportEvery = normalized;
+  e.target.value = String(normalized);
+  saveProgress();
+  showToast('Auto-export interval set to ' + normalized);
+});
+
 let toastTimer;
 function showToast(msg) {
   const t = $('toast');
@@ -2062,6 +2107,10 @@ function showToast(msg) {
 }
 
 loadProgress();
+if (!progressData.autoExportEvery) {
+  progressData.autoExportEvery = DEFAULT_AUTO_EXPORT_EVERY;
+}
+$('auto-export-every').value = String(normalizeAutoExportEvery(progressData.autoExportEvery));
 loadDecks().catch(err => {
   statsBar.innerHTML = 'Could not load decks. Serve this app over HTTP (not file://).';
   console.error(err);

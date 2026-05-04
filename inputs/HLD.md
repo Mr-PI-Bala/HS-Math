@@ -23,6 +23,7 @@
 - Deck-level action counters
 - Undo support for recent action
 - Auto-export action threshold handling
+- User-configurable auto-export interval persisted with progress state
 
 4. UX and Navigation
 - Sidebar dashboard for category counts

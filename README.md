@@ -74,6 +74,9 @@ Progress is stored in **localStorage** during your session. To persist it across
 2. Copy/move it to `cfg/progress.json` and commit
 3. On a new device, click **⬆ Import** and pick `cfg/progress.json`
 
+Auto-export supports a user-editable interval value (default `5` completed actions).
+That interval is saved in local state and included in exported/imported JSON.
+
 ## Reading long content
 
 Hints, answers, examples, steps, and tips are visually clamped inside the flashcard for layout stability.

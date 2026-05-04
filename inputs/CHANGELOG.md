@@ -4,6 +4,10 @@
 ### Fixed
 - Restored ArrowLeft keyboard navigation to previous card during study flow.
 
+## [Unreleased] - 2026-05-04
+### Updated
+- Auto-export interval is now editable (default 5) and persisted in local state and exported/imported JSON.
+
 ## [v1.0.6] - 2026-05-04
 ### Updated
 - Added dedicated principles source file (`inputs/PRINCIPLES.md`) and linked it in AGENTS/README workflow.
