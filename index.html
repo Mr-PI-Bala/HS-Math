@@ -1477,6 +1477,27 @@ function revealHint() {
   }
 }
 
+function onHintSlotClick(level) {
+  if (queue.length === 0 || queueIdx >= queue.length || sessionEnded || revealed) return;
+
+  // Clicking the next unrevealed hint should behave like pressing H.
+  if (level === hintLevel + 1) {
+    revealHint();
+    return;
+  }
+
+  // Out-of-order clicks preserve current state with hidden placeholder behavior.
+  if (level > hintLevel + 1) {
+    showToast('Reveal hints in order: 1 -> 2 -> 3.');
+    return;
+  }
+
+  // Already revealed hint: show expanded detail as read-only reference.
+  const slot = hintSlots[level - 1];
+  const text = slot?.dataset.fullText || '';
+  if (text) openExpandPanel('Hint level ' + level, text);
+}
+
 function wireExpandableAreas(card) {
   const answerEl = $('card-back');
   const exampleEl = $('card-example');
@@ -1811,7 +1832,13 @@ $('btn-hint').addEventListener('click', e => {
 $('btn-restart').addEventListener('click', buildQueue);
 $('btn-export-done').addEventListener('click', exportProgress);
 
-hintSlots.forEach((slot, index) => bindExpandable(slot, 'Hint level ' + (index + 1)));
+hintSlots.forEach((slot, index) => {
+  slot.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    onHintSlotClick(index + 1);
+  });
+});
 bindExpandable($('card-back'), 'Answer');
 bindExpandable($('card-example'), 'Real-world example');
 bindExpandable($('card-steps'), 'Steps to arrive at answer');

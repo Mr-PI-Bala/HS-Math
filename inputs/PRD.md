@@ -6,6 +6,12 @@ HS Math Flashcards (static browser app)
 ## Vision
 Provide a high-impact, low-friction study tool for middle school and high school math where Core Mastery concepts are prioritized first and Optional depth appears only after diminishing-return threshold.
 
+## UX Guiding Principle
+- Maintain visual context and perspective stability.
+- Avoid dynamic layout/window/context jumps that cause distraction or eye strain.
+- Flashcard area is the kingpin and should retain the dominant share of screen space.
+- Supporting controls remain compact and consistent in location.
+
 ## Audience
 - Middle school learners
 - High school learners
@@ -81,6 +87,6 @@ Each card supports:
 - Change summary must be recorded in inputs/CHANGELOG.md.
 
 ## Open Enhancements Backlog
-- Expand hand-crafted hints/steps/tips/examples across all core cards.
+- Expand hand-crafted hints/steps/tips/examples across all core cards (highly desirable).
 - Add robust undo stack details to exported progress if required.
 - Optional analytics views per category over time.

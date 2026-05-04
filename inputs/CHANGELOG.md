@@ -1,5 +1,14 @@
 # Change Log
 
+## [v1.0.5] - 2026-05-04
+### Fixed
+- Clicking the next unrevealed hint slot now behaves like H/Hint button and reveals that hint.
+- Out-of-order hint slot clicks keep current hidden-state behavior (no forced reveal jump).
+
+### Updated
+- PRD now explicitly documents UX stability principle (fixed context, flashcard-first space priority).
+- PRD backlog marks hand-crafted card pedagogy expansion as highly desirable.
+
 ## [v1.0.4] - 2026-05-04
 ### Fixed
 - Reduced left dashboard footprint by roughly 50 percent to prioritize card width.

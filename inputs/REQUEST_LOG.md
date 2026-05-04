@@ -29,3 +29,5 @@
 20. [Implemented] Clamp long hint/answer/example/steps/tip text inside card boxes with expandable popup details.
 21. [Implemented] Add compact hint progress indicator next to hint button.
 22. [Implemented] Compress side rails/toolbars/action rows to maximize flashcard space and move filter toolbar to single skinny full-width top row.
+23. [Implemented] Hint slot click reveals next hint in sequence (same behavior as H), while out-of-order clicks keep hidden behavior.
+24. [Implemented] Document UX stability principle: keep context/perspective stable and preserve flashcard as dominant area.
