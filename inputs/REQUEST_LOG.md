@@ -31,3 +31,4 @@
 22. [Implemented] Compress side rails/toolbars/action rows to maximize flashcard space and move filter toolbar to single skinny full-width top row.
 23. [Implemented] Hint slot click reveals next hint in sequence (same behavior as H), while out-of-order clicks keep hidden behavior.
 24. [Implemented] Document UX stability principle: keep context/perspective stable and preserve flashcard as dominant area.
+25. [Implemented] Create dedicated principles document and wire it into project instructions/docs for reuse as default guidance.

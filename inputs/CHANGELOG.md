@@ -8,6 +8,7 @@
 ### Updated
 - PRD now explicitly documents UX stability principle (fixed context, flashcard-first space priority).
 - PRD backlog marks hand-crafted card pedagogy expansion as highly desirable.
+- Added dedicated principles source file (`inputs/PRINCIPLES.md`) and linked it in AGENTS/README workflow.
 
 ## [v1.0.4] - 2026-05-04
 ### Fixed

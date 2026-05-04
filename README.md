@@ -36,6 +36,7 @@ cfg/
   decks/
     ...13 deck JSON files (HS/AP/MS/bonus)
 inputs/
+  PRINCIPLES.md     # Canonical UX/engineering principles for this project
   PRD.md            # Requirements and feature scope
   HLD.md            # High-level architecture
   LLD.md            # Low-level implementation details
@@ -52,6 +53,7 @@ All new asks are tracked in `inputs/REQUEST_LOG.md`, reflected in `inputs/PRD.md
 - `inputs/HLD.md`
 - `inputs/LLD.md`
 - `inputs/CHANGELOG.md`
+- `inputs/PRINCIPLES.md`
 
 ## PR hygiene checklist
 

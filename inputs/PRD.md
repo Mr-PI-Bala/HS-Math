@@ -11,6 +11,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 - Avoid dynamic layout/window/context jumps that cause distraction or eye strain.
 - Flashcard area is the kingpin and should retain the dominant share of screen space.
 - Supporting controls remain compact and consistent in location.
+- Canonical principles source: inputs/PRINCIPLES.md
 
 ## Audience
 - Middle school learners
