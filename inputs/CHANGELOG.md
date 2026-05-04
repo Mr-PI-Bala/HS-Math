@@ -1,14 +1,18 @@
 # Change Log
 
+## [v1.0.7] - 2026-05-04
+### Fixed
+- Restored ArrowLeft keyboard navigation to previous card during study flow.
+
+## [v1.0.6] - 2026-05-04
+### Updated
+- Added dedicated principles source file (`inputs/PRINCIPLES.md`) and linked it in AGENTS/README workflow.
+- PRD explicitly documents UX stability principle and marks hand-crafted pedagogy as highly desirable backlog.
+
 ## [v1.0.5] - 2026-05-04
 ### Fixed
 - Clicking the next unrevealed hint slot now behaves like H/Hint button and reveals that hint.
 - Out-of-order hint slot clicks keep current hidden-state behavior (no forced reveal jump).
-
-### Updated
-- PRD now explicitly documents UX stability principle (fixed context, flashcard-first space priority).
-- PRD backlog marks hand-crafted card pedagogy expansion as highly desirable.
-- Added dedicated principles source file (`inputs/PRINCIPLES.md`) and linked it in AGENTS/README workflow.
 
 ## [v1.0.4] - 2026-05-04
 ### Fixed

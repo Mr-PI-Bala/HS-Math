@@ -1897,6 +1897,12 @@ document.addEventListener('keydown', e => {
     return;
   }
 
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    previousCard();
+    return;
+  }
+
   if (e.key === 'ArrowUp') {
     e.preventDefault();
     markCard('strong');
