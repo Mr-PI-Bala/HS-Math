@@ -1,0 +1,73 @@
+# Low-Level Design (LLD)
+
+## File Map
+- index.html: complete UI, state handling, rendering, keyboard and interactions
+- cfg/manifest.json: list of deck file references
+- cfg/decks/*.json: deck and card content
+- cfg/progress.json: repository source-of-truth progress template
+- inputs/*.md: documentation and lifecycle tracking
+
+## Core JS State (index.html)
+- decks[]
+- progressData { cards, deckStats, actionsSinceExport, lastExported }
+- queue[]
+- queueIdx
+- revealed
+- includeOptionalCards
+- sessionEnded
+- actionHistory[]
+- hintLevel
+
+## Queue Pipeline
+1. Read selected category and status filter
+2. Partition each deck into core/optional via coreCount or default 14
+3. Include optional only when toggle is enabled
+4. Apply status filtering
+5. Reset queue index and render
+
+## Card Rendering
+Front:
+- Question text
+- Hint ladder panel with 3 slots
+- Hint button / H key progression
+
+Back:
+- Question recap
+- Answer text
+- Real-world example footer
+- Steps list on right panel
+- Bold memory tip at bottom-right
+
+## Interaction Handlers
+- Click card: flip reveal/hide
+- Hint button / H: reveal next hint level
+- Strong/Review: mark and advance
+- Right Arrow: skip
+- Left Arrow: previous card
+- Up Arrow: strong
+- Down Arrow: review
+- Shift+Down: next category
+- Shift+Up: focus/open category dropdown
+- Space: reveal then next
+- Escape: hide answer
+- Backspace: undo last action
+
+## Persistence and Export/Import
+- saveProgress() writes to localStorage
+- exportProgress() writes JSON blob
+- copy-export writes JSON to clipboard
+- import parses uploaded JSON and normalizes schema
+- reset clears progressData to defaults
+
+## Undo Model
+- actionHistory stores mark/skip actions
+- undoLastAction() reverts card status and deck-level counters
+- re-renders queue and dashboard after rollback
+
+## Hand-Crafted Card Fields
+- steps: string[]
+- tip: string
+- hints: string[3]
+- example: string
+
+Fallback behavior auto-generates when these fields are absent.

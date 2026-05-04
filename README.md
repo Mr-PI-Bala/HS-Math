@@ -34,11 +34,22 @@ cfg/
   manifest.json     # Lists every deck file
   progress.json     # Single source of truth for committed progress
   decks/
-    algebra.json
-    geometry.json
-    trigonometry.json
-    precalculus.json
+    ...13 deck JSON files (HS/AP/MS/bonus)
+inputs/
+  PRD.md            # Requirements and feature scope
+  HLD.md            # High-level architecture
+  LLD.md            # Low-level implementation details
+  REQUEST_LOG.md    # Running list of asks and statuses
+  CHANGELOG.md      # Versioned change tracking
 ```
+
+## Documentation workflow
+
+All new asks are tracked in `inputs/REQUEST_LOG.md`, reflected in `inputs/PRD.md`, and after implementation the design docs are updated in:
+
+- `inputs/HLD.md`
+- `inputs/LLD.md`
+- `inputs/CHANGELOG.md`
 
 ## Progress workflow
 
@@ -79,8 +90,12 @@ To add a new deck:
 | Key | Action |
 |-----|--------|
 | `Space` | Reveal / next card |
-| `S` | Mark Strong |
-| `R` | Mark Review |
 | `→` | Skip card |
-
-High School Math Flash Card and Interview Prep App
+| `←` | Previous card |
+| `↑` | Mark Strong |
+| `↓` | Mark Review |
+| `Shift + ↓` | Next category |
+| `Shift + ↑` | Focus category picker |
+| `H` | Reveal next hint level |
+| `Esc` | Hide answer |
+| `Backspace` | Undo last action |
