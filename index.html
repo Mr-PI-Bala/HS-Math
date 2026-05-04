@@ -753,6 +753,33 @@
       margin-top: -0.12rem;
     }
 
+    #swipe-hint {
+      margin: 0.3rem auto 0;
+      max-width: 560px;
+      border: 1px solid #dbe3ff;
+      background: #f4f7ff;
+      color: #2a376f;
+      border-radius: 10px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.66rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    #swipe-hint button {
+      border: 1px solid #c7d3ff;
+      background: #fff;
+      color: #2a376f;
+      border-radius: 7px;
+      padding: 0.16rem 0.35rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
     .save-guide {
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -1177,6 +1204,10 @@
             <div id="keyboard-hint" style="display:none">
               Space reveal/next | Right skip | Left previous | Up strong | Down review | Shift+Down next category | Shift+Up choose category
             </div>
+            <div id="swipe-hint" style="display:none">
+              <span>Swipe: ↑ Strong | ↓ Review | ← Previous | → Skip</span>
+              <button id="btn-dismiss-swipe-hint" type="button">Hide</button>
+            </div>
           </div>
 
           <aside class="control-rail">
@@ -1301,6 +1332,11 @@ const hintProgress = $('hint-progress');
 const expandOverlay = $('expand-overlay');
 const expandTitle = $('expand-title');
 const expandContent = $('expand-content');
+const swipeHint = $('swipe-hint');
+
+const SWIPE_HINT_DISMISS_KEY = 'hsMath_swipe_hint_dismissed_v1';
+const isTouchDevice = ('ontouchstart' in window) || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+let swipeHintDismissed = false;
 
 function createEmptyProgress() {
   return {
@@ -1343,6 +1379,33 @@ function loadProgress() {
   } catch {
     progressData = createEmptyProgress();
   }
+}
+
+function loadSwipeHintPreference() {
+  try {
+    swipeHintDismissed = localStorage.getItem(SWIPE_HINT_DISMISS_KEY) === '1';
+  } catch {
+    swipeHintDismissed = false;
+  }
+}
+
+function dismissSwipeHint() {
+  swipeHintDismissed = true;
+  swipeHint.style.display = 'none';
+  try {
+    localStorage.setItem(SWIPE_HINT_DISMISS_KEY, '1');
+  } catch {
+    // Ignore storage errors for non-critical hint preference.
+  }
+}
+
+function updateSwipeHintVisibility() {
+  if (!isTouchDevice || swipeHintDismissed || queue.length === 0 || queueIdx >= queue.length || sessionEnded) {
+    swipeHint.style.display = 'none';
+    return;
+  }
+
+  swipeHint.style.display = queueIdx < 2 ? 'flex' : 'none';
 }
 
 function saveProgress() {
@@ -1468,6 +1531,7 @@ function renderCard() {
     doneState.style.display = 'none';
     emptyState.style.display = 'none';
     sessionEndedState.style.display = 'block';
+    updateSwipeHintVisibility();
     return;
   }
 
@@ -1478,6 +1542,7 @@ function renderCard() {
     kbHint.style.display = 'none';
     doneState.style.display = 'none';
     emptyState.style.display = 'block';
+    updateSwipeHintVisibility();
     return;
   }
 
@@ -1489,6 +1554,7 @@ function renderCard() {
     doneState.style.display = 'block';
     progressBar.style.width = '100%';
     renderDoneDecks();
+    updateSwipeHintVisibility();
     return;
   }
 
@@ -1523,6 +1589,7 @@ function renderCard() {
   setBadge($('card-badge'), status);
   setBadge($('card-badge-b'), status);
   updateFlipActionButtons();
+  updateSwipeHintVisibility();
 
   progressBar.style.width = ((queueIdx / queue.length) * 100) + '%';
 }
@@ -2081,6 +2148,7 @@ $('btn-hint').addEventListener('click', e => {
   revealHint();
 });
 $('btn-restart').addEventListener('click', buildQueue);
+$('btn-dismiss-swipe-hint').addEventListener('click', dismissSwipeHint);
 
 $('btn-prev-deck').addEventListener('click', () => navigateDeck(-1));
 $('btn-next-deck').addEventListener('click', () => navigateDeck(1));
@@ -2369,6 +2437,7 @@ function showToast(msg) {
 }
 
 loadProgress();
+loadSwipeHintPreference();
 syncAutoExportControls();
 loadDecks().catch(err => {
   statsBar.innerHTML = 'Could not load decks. Serve this app over HTTP (not file://).';

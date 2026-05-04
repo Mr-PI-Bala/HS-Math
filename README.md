@@ -124,6 +124,7 @@ To add a new deck:
 | Swipe → | Skip card |
 
 Swipe support is active across the center study area for iPad/tablet-friendly operation.
+On touch devices, a compact swipe hint chip appears for the first two cards and can be dismissed.
 
 ## Keyboard shortcuts
 

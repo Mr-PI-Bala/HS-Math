@@ -57,6 +57,7 @@ Back:
 - Swipe Down: review
 - Swipe Left: previous card
 - Swipe Right: skip
+- Swipe hint chip shown for touch devices on first two cards, with dismiss persisted in localStorage
 - Hint button / H: reveal next hint level
 - Strong/Review: mark and advance
 - Right Arrow: skip
@@ -82,6 +83,7 @@ Back:
 - import parses uploaded JSON and normalizes schema
 - reset clears progressData to defaults
 - autoExportEvery is persisted in localStorage and included in export/import payload
+- swipe hint dismiss preference is persisted in localStorage
 
 ## Undo Model
 - actionHistory stores mark/skip actions

@@ -15,6 +15,7 @@
 - Left sidebar now focuses on categories only; redundant dashboard block removed.
 - Left sidebar deck cards now use collapsible stack sections; active deck remains open by default.
 - Auto-export cadence now uses a user-entered card threshold and persists through local save/export/import.
+- Added touch-only swipe hint chip for first two cards with dismiss persistence.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

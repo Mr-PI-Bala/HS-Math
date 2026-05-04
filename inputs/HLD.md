@@ -33,6 +33,7 @@
 - Right rail for grouped controls and legend with collapsible sections
 - Keyboard mapping for high-speed operation
 - Touch swipe mapping for iPad/tablet operation on center study area
+- Touch-only onboarding hint chip for swipe actions (first two cards, dismissible, persisted)
 - Hint interaction policy where hints do not force answer reveal
 
 5. Pedagogy Layer

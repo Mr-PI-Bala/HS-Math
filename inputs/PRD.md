@@ -52,6 +52,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 19. Compact hint progress badge shown next to hint button.
 20. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
 21. Collapsible deck stacks on left dashboard and collapsible grouped controls on right rail.
+22. Touch-only swipe hint chip shown in center panel on first two cards with persistent dismiss option.
 
 ## Category Coverage (Implemented)
 - Algebra

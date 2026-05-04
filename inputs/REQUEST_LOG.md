@@ -42,3 +42,4 @@
 33. [Implemented] Add swipe gestures on center study area (up=strong, down=review, left=previous, right=skip).
 34. [Implemented] Split legend into Swipe Gestures and Keyboard Commands sections.
 35. [Implemented] Add Core/Optional breakdown beside Total in top stats row and remove redundant left Dashboard block.
+36. [Implemented] Add touch-only swipe hint chip in center panel for first two cards with dismiss persistence.
