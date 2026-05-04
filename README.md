@@ -41,6 +41,8 @@ inputs/
   LLD.md            # Low-level implementation details
   REQUEST_LOG.md    # Running list of asks and statuses
   CHANGELOG.md      # Versioned change tracking
+  HYGIENE_CHECKLIST_TEMPLATE.md # Reusable process checklist for other projects
+AGENTS.md           # Project instruction policy
 ```
 
 ## Documentation workflow
@@ -50,6 +52,17 @@ All new asks are tracked in `inputs/REQUEST_LOG.md`, reflected in `inputs/PRD.md
 - `inputs/HLD.md`
 - `inputs/LLD.md`
 - `inputs/CHANGELOG.md`
+
+## PR hygiene checklist
+
+Before merging, confirm all are done:
+
+- Request captured in `inputs/REQUEST_LOG.md`
+- Requirement reflected in `inputs/PRD.md`
+- Architecture/design updates in `inputs/HLD.md` and `inputs/LLD.md`
+- Release notes updated in `inputs/CHANGELOG.md`
+- README user docs updated if controls/flows changed
+- Errors checked for touched files
 
 ## Progress workflow
 

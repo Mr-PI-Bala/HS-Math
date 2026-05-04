@@ -1,5 +1,17 @@
 # Change Log
 
+## [Unreleased] - 2026-05-04
+### Added
+- AGENTS.md with required project instruction workflow.
+- inputs/HYGIENE_CHECKLIST_TEMPLATE.md for reuse across projects.
+- README PR hygiene checklist section.
+
+### Fixed
+- H/h keyboard hint trigger now works reliably without needing hint button click.
+- Hint button no longer bubbles click to card flip (question side remains visible while revealing hints).
+- Hint exhaustion now shows explicit guidance instead of repeated reveal behavior.
+- Answer card right-panel overflow/spacing cleaned up for better readability.
+
 ## [v1.0.1] - 2026-05-04
 ### Added
 - Inputs documentation system under inputs/:

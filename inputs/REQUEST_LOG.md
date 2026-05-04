@@ -22,3 +22,7 @@
 13. [Implemented] v1.0 baseline commit and tag.
 14. [Implemented] Inputs documentation system (PRD/HLD/LLD/Change Log/Request Log).
 15. [In Progress] Expand hand-crafted card pedagogy (hints/steps/tip/example) deck-wide.
+16. [Implemented] Fix H/h keyboard hint trigger parity and prevent hint action from flipping to answer.
+17. [Implemented] Improve answer-card layout overflow and spacing hygiene.
+18. [Implemented] Add project instruction file and reusable hygiene checklist template.
+19. [Implemented] Add README PR hygiene checklist for enforcement.

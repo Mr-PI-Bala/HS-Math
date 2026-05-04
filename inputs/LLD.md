@@ -5,6 +5,7 @@
 - cfg/manifest.json: list of deck file references
 - cfg/decks/*.json: deck and card content
 - cfg/progress.json: repository source-of-truth progress template
+- AGENTS.md: project-level instruction and delivery workflow
 - inputs/*.md: documentation and lifecycle tracking
 
 ## Core JS State (index.html)
@@ -30,6 +31,7 @@ Front:
 - Question text
 - Hint ladder panel with 3 slots
 - Hint button / H key progression
+- Hint reveals are non-flip actions and stay on question side
 
 Back:
 - Question recap

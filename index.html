@@ -307,7 +307,7 @@
       transform: rotateY(180deg);
       background: #fafbff;
       justify-content: center;
-      align-items: flex-start;
+      align-items: stretch;
       text-align: left;
     }
 
@@ -478,6 +478,7 @@
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1rem;
       align-items: stretch;
+      min-height: 0;
     }
 
     .card-back-left {
@@ -485,6 +486,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      overflow-wrap: anywhere;
     }
 
     .card-back-right {
@@ -493,6 +495,7 @@
       padding-left: 1rem;
       display: flex;
       flex-direction: column;
+      overflow-wrap: anywhere;
     }
 
     .card-steps-title {
@@ -510,6 +513,7 @@
       line-height: 1.45;
       display: grid;
       gap: 0.35rem;
+      padding-right: 0.15rem;
     }
 
     .card-tip {
@@ -1309,10 +1313,16 @@ function revealHint() {
     showToast('Hints are shown on the question side before revealing answer.');
     return;
   }
-  hintLevel = Math.min(3, hintLevel + 1);
+
+  if (hintLevel >= 3) {
+    showToast('All hints are exhausted. Reveal the answer or choose another action.');
+    return;
+  }
+
+  hintLevel += 1;
   renderHintSlots(queue[queueIdx]);
   if (hintLevel === 3) {
-    showToast('All 3 hints revealed');
+    showToast('Hint level 3 revealed. All hints shown.');
   }
 }
 
@@ -1599,7 +1609,11 @@ $('btn-reveal').addEventListener('click', toggleReveal);
 $('btn-strong').addEventListener('click', () => markCard('strong'));
 $('btn-review').addEventListener('click', () => markCard('review'));
 $('btn-skip').addEventListener('click', skipCard);
-$('btn-hint').addEventListener('click', revealHint);
+$('btn-hint').addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  revealHint();
+});
 $('btn-restart').addEventListener('click', buildQueue);
 $('btn-export-done').addEventListener('click', exportProgress);
 
@@ -1607,7 +1621,15 @@ deckFilter.addEventListener('change', buildQueue);
 statusFilter.addEventListener('change', buildQueue);
 
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+  const tag = e.target.tagName;
+  const isTypingField = tag === 'TEXTAREA' || e.target.isContentEditable || (tag === 'INPUT' && e.target.type !== 'file');
+  if (isTypingField) return;
+
+  if (e.key === 'h' || e.key === 'H') {
+    e.preventDefault();
+    revealHint();
+    return;
+  }
 
   if (e.shiftKey && e.key === 'ArrowDown') {
     e.preventDefault();
@@ -1634,12 +1656,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') {
     e.preventDefault();
     skipCard();
-    return;
-  }
-
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    previousCard();
     return;
   }
 

@@ -29,6 +29,7 @@
 - Toolbar with current category + filters
 - Right rail for grouped controls and legend
 - Keyboard mapping for high-speed operation
+- Hint interaction policy where hints do not force answer reveal
 
 5. Pedagogy Layer
 - Right-side answer scaffold: steps and memory tip
@@ -49,3 +50,4 @@
 ## Operational Baseline
 - Version baseline tags: v1.0, v1.0.1+
 - Documentation baseline maintained under inputs/
+- Project governance instructions maintained in AGENTS.md

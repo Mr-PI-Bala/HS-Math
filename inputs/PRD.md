@@ -38,6 +38,8 @@ Provide a high-impact, low-friction study tool for middle school and high school
 13. Keyboard navigation and legend.
 14. Responsive two-column study layout with right-side control rail.
 15. Multiple deck families: HS, AP, MS, and bonus fun/tricks.
+16. Hint ladder behavior: H/h and hint button reveal clues without flipping card.
+17. Documentation governance via AGENTS.md and inputs workflow.
 
 ## Category Coverage (Implemented)
 - Algebra
