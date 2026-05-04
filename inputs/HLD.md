@@ -29,9 +29,16 @@
 - Sidebar dashboard for category counts
 - Toolbar with current category + filters
 - Right rail for grouped controls and legend
-- Keyboard mapping for high-speed operation
+- Keyboard mapping for high-speed operation with cross-browser key alias normalization
+- Focus-aware keyboard routing so non-text control focus does not disable study shortcuts
+- Optional shortcut-debug instrumentation overlay for key-capture verification
 - Hint interaction policy where hints do not force answer reveal
 - Top utility actions for calculator tools and interview-prep gotchas popup
+- Utility launch strategy with graceful fallbacks when popups are blocked
+
+6. Quality Guardrails
+- `gotcha.md` captures regression patterns, root causes, and prevention checks.
+- Visual spacing checks ensure card badge, hint controls, and progress chips do not overlap.
 
 5. Pedagogy Layer
 - Right-side answer scaffold: steps and memory tip

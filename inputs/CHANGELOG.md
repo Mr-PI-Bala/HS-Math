@@ -1,5 +1,18 @@
 # Change Log
 
+## [Unreleased]
+### Fixed
+- Hardened Desmos/TI-84 utility launch behavior to use popup first and fall back to a new tab when blocked.
+- Updated interview gotchas utility to open a dedicated popup when allowed, with in-page expand-panel fallback when blocked.
+- Restored robust Arrow/H keyboard handling by normalizing key aliases across browser variants.
+- Updated Up/Down keyboard actions to mark-and-advance in one keypress and improved Left Arrow first-card feedback.
+- Updated global shortcut gating so focused non-text controls no longer disable arrow/H study shortcuts.
+- Added a shortcut-debug toggle that shows a brief captured-key overlay for keyboard QA.
+- Adjusted card status badge and hint-progress spacing to prevent NEW/REVIEW and hint-count overlap.
+
+### Added
+- Added gotcha.md to capture recurring implementation mistakes and hardening lessons.
+
 ## [v1.0.9] - 2026-05-04
 ### Updated
 - Top row now aligns middle filter controls with a compact right utility column for Desmos/TI-84/interview gotchas.

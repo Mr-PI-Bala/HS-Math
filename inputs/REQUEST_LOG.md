@@ -35,3 +35,7 @@
 26. [Implemented] Fix ArrowLeft keyboard navigation so previous-card works during hints/question/answer states.
 27. [Implemented] Make auto-export interval user-editable (default 5) and persist it in exported/imported progress state.
 28. [Implemented] Add top-right utility buttons for Desmos popout, TI-84 emulator popout, and teacher interview gotchas popup.
+29. [Implemented] Harden top utility buttons with reliable popout/new-tab fallback and interview-gotchas fallback panel.
+30. [Implemented] Restore robust Arrow/H keyboard behavior with cross-browser key aliases and immediate Up/Down marking.
+31. [Implemented] Keep global study shortcuts active while category/filter controls are focused, and log regressions in gotcha.md.
+32. [Implemented] Add shortcut debug toggle overlay and fix hint progress overlap with status badge on card front.

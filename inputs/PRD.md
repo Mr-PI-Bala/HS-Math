@@ -52,6 +52,12 @@ Provide a high-impact, low-friction study tool for middle school and high school
 20. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
 21. Editable auto-export interval (default 5) persisted in local/export/import state.
 22. Top-right utility actions for Desmos popout, TI-84 emulator popout, and interview gotchas prep popup.
+23. Utility button resilience: popout first, then new-tab/in-page fallback when browser popup rules block windows.
+24. Keyboard shortcut reliability across browser key variants, with one-press Up/Down marking and stable left-arrow previous navigation feedback.
+25. Keyboard shortcuts remain active when non-text controls (category/status selectors, numeric interval input) hold focus.
+26. Regression lessons are captured in gotcha.md for future robustness improvements.
+27. Optional shortcut-debug overlay toggle to show captured key actions during QA.
+28. Card-front hint progress and status badge spacing tuned to avoid visual overlap.
 
 ## Category Coverage (Implemented)
 - Algebra

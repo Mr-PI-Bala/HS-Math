@@ -365,11 +365,12 @@
 
     .card-badge {
       position: absolute;
-      top: 0.9rem;
-      right: 0.9rem;
-      font-size: 0.72rem;
+      top: 0.52rem;
+      right: 0.72rem;
+      font-size: 0.62rem;
       font-weight: 700;
-      padding: 0.2rem 0.55rem;
+      line-height: 1;
+      padding: 0.13rem 0.45rem;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -426,6 +427,7 @@
       min-width: 0;
       border-left: 1px solid var(--border);
       padding-left: 1rem;
+      padding-top: 0.38rem;
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
@@ -452,6 +454,8 @@
       padding: 0.14rem 0.38rem;
       background: #fff;
       white-space: nowrap;
+      position: relative;
+      top: 0.12rem;
     }
 
     .hint-title {
@@ -840,6 +844,24 @@
 
     .legend-list strong { color: var(--text); }
 
+    .legend-debug {
+      margin-top: 0.3rem;
+      display: grid;
+      gap: 0.15rem;
+    }
+
+    .legend-debug-note {
+      font-size: 0.58rem;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+
+    .rail-btn.debug.active {
+      border-color: #93c5fd;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
     .sidebar-toggle {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -880,6 +902,30 @@
 
     #toast.show { transform: translateX(-50%) translateY(0); }
     #import-input { display: none; }
+
+    #shortcut-debug-indicator {
+      position: fixed;
+      right: 0.9rem;
+      bottom: 0.9rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid #bfdbfe;
+      background: rgba(239, 246, 255, 0.97);
+      color: #1e40af;
+      font-size: 0.66rem;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(30, 64, 175, 0.18);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    #shortcut-debug-indicator.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .expand-overlay {
       position: fixed;
@@ -1135,6 +1181,10 @@
                 <div><strong>Escape:</strong> Hide answer</div>
                 <div><strong>Backspace:</strong> Undo last mark/skip</div>
               </div>
+              <div class="legend-debug">
+                <button class="rail-btn debug" id="btn-shortcut-debug" type="button" aria-pressed="false">Shortcut Debug: Off</button>
+                <div class="legend-debug-note">Shows a brief overlay for each captured keyboard shortcut.</div>
+              </div>
             </section>
 
             <section class="rail-group">
@@ -1172,6 +1222,7 @@
 </div>
 
 <div id="toast"></div>
+<div id="shortcut-debug-indicator" aria-live="polite"></div>
 <div id="expand-overlay" class="expand-overlay" aria-hidden="true">
   <div class="expand-panel" role="dialog" aria-modal="true" aria-labelledby="expand-title">
     <div class="expand-head">
@@ -1184,6 +1235,7 @@
 
 <script>
 const STORAGE_KEY = 'hsMath_progress_v2';
+const SHORTCUT_DEBUG_KEY = 'hsMath_shortcut_debug_v1';
 const MANIFEST = 'cfg/manifest.json';
 const CORE_MASTERY_TARGET = 14;
 const DESMOS_URL = 'https://www.desmos.com/calculator';
@@ -1251,9 +1303,13 @@ const sessionEndedState = $('session-ended-state');
 const currentCategoryChip = $('current-category-chip');
 const hintSlots = [$('hint-slot-1'), $('hint-slot-2'), $('hint-slot-3')];
 const hintProgress = $('hint-progress');
+const shortcutDebugIndicator = $('shortcut-debug-indicator');
+const shortcutDebugBtn = $('btn-shortcut-debug');
 const expandOverlay = $('expand-overlay');
 const expandTitle = $('expand-title');
 const expandContent = $('expand-content');
+let shortcutDebugEnabled = false;
+let shortcutDebugTimer;
 
 function createEmptyProgress() {
   return {
@@ -1647,9 +1703,83 @@ function closeExpandPanel() {
 }
 
 function openUtilityPopout(url, name) {
-  const popup = window.open(url, name, 'popup=yes,width=1280,height=820,noopener,noreferrer');
-  if (!popup) {
-    showToast('Popup blocked. Allow popups for this site and try again.');
+  const popup = window.open(url, name, 'popup=yes,width=1280,height=820');
+  if (popup && !popup.closed) {
+    try {
+      popup.opener = null;
+      popup.focus();
+    } catch {
+      // Cross-origin popouts can restrict focus/opener access; open is still successful.
+    }
+    return true;
+  }
+
+  const fallback = window.open(url, '_blank');
+  if (fallback && !fallback.closed) {
+    showToast('Opened in a new tab. Enable popups for popout windows.');
+    return true;
+  }
+
+  showToast('Popup blocked. Allow popups for this site and try again.');
+  return false;
+}
+
+function openTextPopout(title, bodyText, name) {
+  const popup = window.open('', name, 'popup=yes,width=980,height=760');
+  if (!popup || popup.closed) {
+    openExpandPanel(title, bodyText);
+    showToast('Popup blocked. Showing details in-page instead.');
+    return;
+  }
+
+  const escapedTitle = escapeHtml(title);
+  const escapedBody = escapeHtml(bodyText);
+  popup.document.open();
+  popup.document.write(`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>${escapedTitle}</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0;
+      padding: 18px 20px 22px;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #1f2330;
+      background: #f7f9ff;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      color: #2f3f9b;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #ffffff;
+      border: 1px solid #dbe3ff;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>${escapedTitle}</h1>
+  <pre>${escapedBody}</pre>
+</body>
+</html>`);
+  popup.document.close();
+  try {
+    popup.opener = null;
+    popup.focus();
+  } catch {
+    // Focus may fail in restricted popup contexts.
   }
 }
 
@@ -1827,11 +1957,16 @@ function nextCard() {
 }
 
 function previousCard() {
-  if (queue.length === 0) return;
+  if (queue.length === 0 || queueIdx >= queue.length) return;
+  if (queueIdx === 0) {
+    showToast('Already at the first card.');
+    return;
+  }
   queueIdx = Math.max(0, queueIdx - 1);
   revealed = false;
   renderCard();
   renderStats();
+  renderSidebar();
 }
 
 function changeCategoryBy(step) {
@@ -1854,12 +1989,63 @@ function markCard(status) {
     return;
   }
 
+  applyMark(status);
+}
+
+function applyMark(status) {
+  if (queue.length === 0 || queueIdx >= queue.length || sessionEnded) return;
   const card = queue[queueIdx];
   const prevStatus = getStatus(card.id);
   actionHistory.push({ kind: 'mark', cardId: card.id, deckId: card._deckId, prevStatus, newStatus: status, cardQueueIndex: queueIdx });
   setStatus(card.id, status);
   recordAction(card._deckId, status);
   advance();
+}
+
+function markCardFromKeyboard(status) {
+  // Keyboard shortcuts should perform immediate marking in one keypress.
+  applyMark(status);
+}
+
+function getEventKeyAliases(e) {
+  const key = String(e.key || '');
+  const code = String(e.code || '');
+  return new Set([key, code]);
+}
+
+function isKeyMatch(e, candidates) {
+  const aliases = getEventKeyAliases(e);
+  return candidates.some(candidate => aliases.has(candidate));
+}
+
+function setShortcutDebugEnabled(enabled, options = {}) {
+  const { announce = true } = options;
+  shortcutDebugEnabled = Boolean(enabled);
+  shortcutDebugBtn.classList.toggle('active', shortcutDebugEnabled);
+  shortcutDebugBtn.textContent = shortcutDebugEnabled ? 'Shortcut Debug: On' : 'Shortcut Debug: Off';
+  shortcutDebugBtn.setAttribute('aria-pressed', shortcutDebugEnabled ? 'true' : 'false');
+
+  try {
+    localStorage.setItem(SHORTCUT_DEBUG_KEY, shortcutDebugEnabled ? '1' : '0');
+  } catch {
+    // Non-fatal in restricted storage contexts.
+  }
+
+  if (!shortcutDebugEnabled) {
+    shortcutDebugIndicator.classList.remove('show');
+  }
+
+  if (announce) {
+    showToast(shortcutDebugEnabled ? 'Shortcut debug enabled.' : 'Shortcut debug disabled.');
+  }
+}
+
+function showShortcutDebug(message) {
+  if (!shortcutDebugEnabled) return;
+  shortcutDebugIndicator.textContent = 'Shortcut: ' + message;
+  shortcutDebugIndicator.classList.add('show');
+  clearTimeout(shortcutDebugTimer);
+  shortcutDebugTimer = setTimeout(() => shortcutDebugIndicator.classList.remove('show'), 1100);
 }
 
 function advance() {
@@ -1967,7 +2153,7 @@ $('btn-ti84').addEventListener('click', e => {
 
 $('btn-interview-gotchas').addEventListener('click', e => {
   e.preventDefault();
-  openExpandPanel('Teacher Interview Gotchas', INTERVIEW_GOTCHAS);
+  openTextPopout('Teacher Interview Gotchas', INTERVIEW_GOTCHAS, 'teacherInterviewGotchas');
 });
 
 hintSlots.forEach((slot, index) => {
@@ -1990,37 +2176,61 @@ expandOverlay.addEventListener('click', e => {
 deckFilter.addEventListener('change', buildQueue);
 statusFilter.addEventListener('change', buildQueue);
 
-document.addEventListener('keydown', e => {
-  const tag = e.target.tagName;
-  const isTypingField = tag === 'TEXTAREA' || e.target.isContentEditable || (tag === 'INPUT' && e.target.type !== 'file');
-  if (isTypingField) return;
+function shouldIgnoreGlobalShortcut(target) {
+  const el = target instanceof HTMLElement ? target : null;
+  if (!el) return false;
+  if (el.isContentEditable) return true;
 
-  if (expandOverlay.classList.contains('open') && e.key === 'Escape') {
+  const tag = el.tagName;
+  if (tag === 'TEXTAREA') return true;
+  if (tag !== 'INPUT') return false;
+
+  const textLikeInputTypes = new Set([
+    'text',
+    'search',
+    'url',
+    'tel',
+    'email',
+    'password'
+  ]);
+  const inputType = (el.getAttribute('type') || 'text').toLowerCase();
+  return textLikeInputTypes.has(inputType);
+}
+
+document.addEventListener('keydown', e => {
+  if (shouldIgnoreGlobalShortcut(e.target)) return;
+
+  if (expandOverlay.classList.contains('open') && isKeyMatch(e, ['Escape', 'Esc'])) {
     e.preventDefault();
+    showShortcutDebug('Esc -> close details');
     closeExpandPanel();
     return;
   }
 
-  if (e.key === 'h' || e.key === 'H') {
+  if (isKeyMatch(e, ['h', 'H', 'KeyH'])) {
     e.preventDefault();
+    showShortcutDebug('H -> hint');
     revealHint();
     return;
   }
 
-  if (e.shiftKey && e.key === 'ArrowDown') {
+  if (e.shiftKey && isKeyMatch(e, ['ArrowDown', 'Down'])) {
     e.preventDefault();
+    showShortcutDebug('Shift+Down -> next category');
     changeCategoryBy(1);
     return;
   }
 
-  if (e.shiftKey && e.key === 'ArrowUp') {
+  if (e.shiftKey && isKeyMatch(e, ['ArrowUp', 'Up'])) {
     e.preventDefault();
+    showShortcutDebug('Shift+Up -> focus category');
     focusCategoryPicker();
     return;
   }
 
-  if (e.key === ' ') {
+  if (isKeyMatch(e, [' ', 'Space', 'Spacebar'])) {
     e.preventDefault();
+    showShortcutDebug(revealed ? 'Space -> next card' : 'Space -> reveal');
     if (revealed) {
       nextCard();
     } else {
@@ -2029,40 +2239,50 @@ document.addEventListener('keydown', e => {
     return;
   }
 
-  if (e.key === 'ArrowRight') {
+  if (isKeyMatch(e, ['ArrowRight', 'Right'])) {
     e.preventDefault();
+    showShortcutDebug('Right -> skip');
     skipCard();
     return;
   }
 
-  if (e.key === 'ArrowLeft') {
+  if (isKeyMatch(e, ['ArrowLeft', 'Left'])) {
     e.preventDefault();
+    showShortcutDebug('Left -> previous');
     previousCard();
     return;
   }
 
-  if (e.key === 'ArrowUp') {
+  if (isKeyMatch(e, ['ArrowUp', 'Up'])) {
     e.preventDefault();
-    markCard('strong');
+    showShortcutDebug('Up -> strong');
+    markCardFromKeyboard('strong');
     return;
   }
 
-  if (e.key === 'ArrowDown') {
+  if (isKeyMatch(e, ['ArrowDown', 'Down'])) {
     e.preventDefault();
-    markCard('review');
+    showShortcutDebug('Down -> review');
+    markCardFromKeyboard('review');
     return;
   }
 
-  if (e.key === 'Escape') {
+  if (isKeyMatch(e, ['Escape', 'Esc'])) {
     e.preventDefault();
+    showShortcutDebug('Esc -> hide answer');
     if (revealed) toggleReveal();
     return;
   }
 
-  if (e.key === 'Backspace') {
+  if (isKeyMatch(e, ['Backspace'])) {
     e.preventDefault();
+    showShortcutDebug('Backspace -> undo');
     undoLastAction();
   }
+});
+
+shortcutDebugBtn.addEventListener('click', () => {
+  setShortcutDebugEnabled(!shortcutDebugEnabled);
 });
 
 $('btn-export').addEventListener('click', exportProgress);
@@ -2215,6 +2435,7 @@ if (!progressData.autoExportEvery) {
   progressData.autoExportEvery = DEFAULT_AUTO_EXPORT_EVERY;
 }
 $('auto-export-every').value = String(normalizeAutoExportEvery(progressData.autoExportEvery));
+setShortcutDebugEnabled(localStorage.getItem(SHORTCUT_DEBUG_KEY) === '1', { announce: false });
 loadDecks().catch(err => {
   statsBar.innerHTML = 'Could not load decks. Serve this app over HTTP (not file://).';
   console.error(err);

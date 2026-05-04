@@ -54,8 +54,10 @@ Back:
 ## Utility Actions
 - `Desmos` button opens graphing calculator in popup window.
 - `TI-84` button opens TI-84 emulator site in popup window.
-- `...` button opens interview gotchas content in existing expand dialog.
+- `...` button opens interview gotchas in a dedicated text popup when available.
 - Popup blocker detection shows toast guidance when blocked.
+- If calculator popup is blocked, app falls back to opening a new tab.
+- Interview gotchas now attempts a dedicated text popup and falls back to in-page expand panel when blocked.
 
 ## Interaction Handlers
 - Click card: flip reveal/hide
@@ -71,11 +73,21 @@ Back:
 - Escape: hide answer
 - Backspace: undo last action
 - Esc closes expanded popup first, then fallback card-hide behavior
+- Keyboard event matching now supports key aliases (`key` + `code`) for broader browser/device compatibility.
+- Up/Down keyboard shortcuts perform immediate mark-and-advance in one keypress.
+- Left Arrow now shows explicit feedback toast when already at first card.
+- Global keyboard shortcuts are blocked only for text-entry contexts (`textarea`, `contenteditable`, text-like input types).
+- Non-text control focus (selects/number inputs) no longer suppresses study shortcuts.
+- Shortcut debug toggle persists in localStorage and shows a short-lived key-capture overlay.
 
 ## Overflow Expansion Model
 - Clamped content regions keep card layout stable.
 - Clicking a clamped region opens modal-style detail panel.
 - Detail panel closes on outside click or Escape.
+
+## Visual Spacing Guardrails
+- Card status badge uses compact typography and higher anchor position.
+- Hint progress chip is nudged below the hint button row to avoid collision with top-right status badge.
 
 ## Persistence and Export/Import
 - saveProgress() writes to localStorage
@@ -97,3 +109,6 @@ Back:
 - example: string
 
 Fallback behavior auto-generates when these fields are absent.
+
+## Regression Capture
+- `gotcha.md` stores concrete mistakes, root causes, and prevention checks from fixes.

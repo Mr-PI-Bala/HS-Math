@@ -44,6 +44,7 @@ inputs/
   CHANGELOG.md      # Versioned change tracking
   HYGIENE_CHECKLIST_TEMPLATE.md # Reusable process checklist for other projects
 AGENTS.md           # Project instruction policy
+gotcha.md           # Regression mistakes, root causes, and prevention notes
 ```
 
 ## Documentation workflow
@@ -54,6 +55,7 @@ All new asks are tracked in `inputs/REQUEST_LOG.md`, reflected in `inputs/PRD.md
 - `inputs/LLD.md`
 - `inputs/CHANGELOG.md`
 - `inputs/PRINCIPLES.md`
+- `gotcha.md` (for regression lessons and guardrails)
 
 ## PR hygiene checklist
 
@@ -93,7 +95,9 @@ Top-right utility buttons provide fast access to:
 - TI-84 emulator popout
 - Teacher interview gotchas popup
 
-Note: Browser popup blockers may need to be disabled for these popouts.
+If browser popup rules block these windows:
+- Desmos/TI-84 fall back to opening in a new tab.
+- Interview gotchas fall back to the in-page expanded details popup.
 
 ## Adding or editing cards
 
@@ -128,10 +132,17 @@ To add a new deck:
 | `Space` | Reveal / next card |
 | `→` | Skip card |
 | `←` | Previous card |
-| `↑` | Mark Strong |
-| `↓` | Mark Review |
+| `↑` | Mark Strong (immediate) |
+| `↓` | Mark Review (immediate) |
 | `Shift + ↓` | Next category |
 | `Shift + ↑` | Focus category picker |
 | `H` | Reveal next hint level |
 | `Esc` | Hide answer |
 | `Backspace` | Undo last action |
+
+Notes:
+- Arrow/H shortcuts are normalized for cross-browser key variants.
+- Pressing `←` on the first card keeps position and shows a short toast.
+- Shortcuts stay active when dropdowns and non-text controls are focused.
+- Shortcut Debug toggle in the Legend panel shows a quick on-screen capture of each recognized key action.
+- Hint progress chip and status badge are spaced to avoid overlap on the front card.
