@@ -90,6 +90,7 @@ At the bottom of the right rail, **Advanced Controls** groups geeky tuning optio
 - Auto-export enable/disable and interval
 - Swipe device profile (auto-detect iPad/iPhone/Android/desktop)
 - Swipe sensitivity tuning (Min Distance, Axis Ratio, Tap Guard)
+- Offline deck pipeline actions: Export Deck Bundle, Import Enhanced Bundle, Export Current Decks Snapshot
 
 If you tweak sensitivity values manually, profile switches to Custom so overrides stay explicit.
 
@@ -141,6 +142,12 @@ Apply enhancement and append history to `cfg/content_quality_metrics.json`:
 ```bash
 python3 scripts/enhance_cards.py
 ```
+
+Suggested loop:
+1. In app Advanced Controls, export deck bundle
+2. Run offline scripts from terminal
+3. Import enhanced bundle in app for session preview
+4. Replace deck files in repo and commit once verified
 
 ## Card statuses
 

@@ -57,6 +57,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 25. Modularized frontend assets (HTML shell + external CSS/JS) for maintainability and reuse.
 26. Quality-control artifacts for deck improvement (`cfg/content_quality_rules.json`, `cfg/content_quality_metrics.json`).
 27. Offline/batch enhancement pipeline scripts for repeatable cleanup and quality tracking.
+28. Advanced Controls actions for offline workflow: export deck bundle, import enhanced bundle, and snapshot export.
 
 ## Category Coverage (Implemented)
 - Algebra

@@ -12,6 +12,7 @@
   <header>
     <h1>HS Math</h1>
     <input type="file" id="import-input" accept=".json" />
+    <input type="file" id="import-enhanced-bundle-input" accept=".json" />
   </header>
 
   <div id="progress-wrap"><div id="progress-bar"></div></div>
@@ -238,6 +239,16 @@
                   Min Distance: higher means fewer accidental swipes.
                   Axis Ratio: higher means stricter horizontal/vertical intent.
                   Tap Guard: delay to prevent swipe ending from triggering tap-to-flip.
+                </div>
+
+                <div class="advanced-subhead" style="margin-top:0.65rem;">Offline Deck Pipeline</div>
+                <div class="advanced-actions">
+                  <button class="rail-btn" id="btn-export-enhancement-bundle" type="button">Export Deck Bundle</button>
+                  <button class="rail-btn" id="btn-import-enhanced-bundle" type="button">Import Enhanced Bundle</button>
+                  <button class="rail-btn" id="btn-export-current-decks" type="button">Export Current Decks Snapshot</button>
+                </div>
+                <div class="advanced-note">
+                  Use Export Deck Bundle before running offline scripts. After offline enhancement, import the resulting bundle here to preview and continue studying.
                 </div>
               </div>
               </div>

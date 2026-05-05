@@ -65,6 +65,7 @@ Back:
 - Swipe Right: skip
 - Swipe hint chip shown for touch devices on first two cards, with dismiss persisted in localStorage
 - Swipe behavior is configurable via device profile and sensitivity thresholds
+- Advanced Controls can export deck bundles and import enhanced bundles for offline pipeline loops
 - Hint button / H: reveal next hint level
 - Strong/Review: mark and advance
 - Right Arrow: skip

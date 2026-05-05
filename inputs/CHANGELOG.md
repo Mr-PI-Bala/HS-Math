@@ -25,6 +25,7 @@
 - Added `cfg/content_quality_rules.json` and `cfg/content_quality_metrics.json` as reusable artifacts for ongoing deck-quality cleanup.
 - Added `scripts/quality_metrics.py` for per-deck/aggregate quality audits.
 - Added `scripts/enhance_cards.py` for repeatable offline batch enhancement with metrics history logging.
+- Advanced Controls now include buttons to export deck bundles, import enhanced bundles, and export deck snapshots.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

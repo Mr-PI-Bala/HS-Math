@@ -49,3 +49,4 @@
 40. [Implemented] Split bloated single-file UI into external stylesheet and app script (`styles/main.css`, `scripts/app.js`).
 41. [Implemented] Add reusable quality rules JSON and quality metrics history JSON for offline deck enhancement.
 42. [Implemented] Add offline scripts (`scripts/quality_metrics.py`, `scripts/enhance_cards.py`) for periodic quality audits and batch enhancement.
+43. [Implemented] Add Advanced Controls buttons to export deck bundle, import enhanced bundle, and export current deck snapshot.

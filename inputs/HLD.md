@@ -33,6 +33,7 @@
 - `scripts/quality_metrics.py` computes per-deck and aggregate quality baselines.
 - `scripts/enhance_cards.py` performs batch enhancement and appends run history metrics.
 - Pipeline is terminal-triggered and output is imported/exported through existing JSON workflows.
+- Advanced Controls in-app actions now provide bundle export/import trigger points for this pipeline.
 
 6. UX and Navigation
 - Sidebar focused on deck categories

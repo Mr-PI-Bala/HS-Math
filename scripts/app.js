@@ -279,6 +279,49 @@ async function loadDecks() {
   buildQueue();
 }
 
+function buildDeckBundlePayload() {
+  return {
+    schemaVersion: 1,
+    generatedAt: new Date().toISOString(),
+    source: {
+      app: 'HS Math Flashcards',
+      manifest: MANIFEST,
+      note: 'Use with scripts/enhance_cards.py for offline batch enhancement.'
+    },
+    decks
+  };
+}
+
+function downloadJson(filename, payload) {
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement('a'), {
+    href: url,
+    download: filename
+  });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function applyEnhancedBundle(data) {
+  if (!data || !Array.isArray(data.decks) || data.decks.length === 0) {
+    throw new Error('Invalid bundle');
+  }
+
+  const valid = data.decks.every(d => d && d.id && d.deck && Array.isArray(d.cards));
+  if (!valid) {
+    throw new Error('Invalid deck structure');
+  }
+
+  decks = data.decks;
+  populateDeckFilter();
+  buildQueue();
+  renderStats();
+  renderSidebar();
+}
+
 function populateDeckFilter() {
   deckFilter.innerHTML = '<option value="all">All decks</option>' +
     decks.map(d => `<option value="${d.id}">${d.deck}</option>`).join('');
@@ -1090,6 +1133,18 @@ document.addEventListener('keydown', e => {
 
 $('btn-export').addEventListener('click', exportProgress);
 
+$('btn-export-enhancement-bundle').addEventListener('click', () => {
+  downloadJson('deck-enhancement-bundle.json', buildDeckBundlePayload());
+  showToast('Deck bundle exported. Run offline enhancement scripts, then import enhanced bundle.');
+});
+
+$('btn-export-current-decks').addEventListener('click', () => {
+  downloadJson('decks-current-snapshot.json', { generatedAt: new Date().toISOString(), decks });
+  showToast('Current deck snapshot exported.');
+});
+
+$('btn-import-enhanced-bundle').addEventListener('click', () => $('import-enhanced-bundle-input').click());
+
 $('auto-export-toggle').addEventListener('change', e => {
   progressData.autoExportEnabled = !!e.target.checked;
   saveProgress();
@@ -1231,6 +1286,24 @@ $('import-input').addEventListener('change', e => {
       showToast('Progress imported and restored.');
     } catch {
       showToast('Could not parse progress file');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+$('import-enhanced-bundle-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      applyEnhancedBundle(data);
+      showToast('Enhanced deck bundle imported into current session.');
+    } catch {
+      showToast('Could not parse enhanced bundle JSON');
     }
   };
   reader.readAsText(file);
