@@ -4,6 +4,8 @@
 - index.html: HTML shell and layout structure
 - styles/main.css: extracted styling rules
 - scripts/app.js: extracted app logic (state handling, rendering, keyboard/touch interactions)
+- scripts/quality_metrics.py: computes quality metrics by deck and aggregate
+- scripts/enhance_cards.py: applies offline enhancement and writes metrics history runs
 - cfg/manifest.json: list of deck file references
 - cfg/decks/*.json: deck and card content
 - cfg/progress.json: repository source-of-truth progress template

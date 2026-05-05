@@ -29,7 +29,12 @@
 - `cfg/content_quality_rules.json` holds reusable anti-blah detection rules.
 - `cfg/content_quality_metrics.json` stores historical before/after improvement metrics.
 
-5. UX and Navigation
+5. Offline Enhancement Pipeline
+- `scripts/quality_metrics.py` computes per-deck and aggregate quality baselines.
+- `scripts/enhance_cards.py` performs batch enhancement and appends run history metrics.
+- Pipeline is terminal-triggered and output is imported/exported through existing JSON workflows.
+
+6. UX and Navigation
 - Sidebar focused on deck categories
 - Toolbar with aligned category + card filter + current state above flashcards
 - Top stats row includes total plus core/optional split

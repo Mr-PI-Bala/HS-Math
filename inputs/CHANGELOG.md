@@ -23,6 +23,8 @@
 - Advanced controls persist via local save and are included in export/import payload.
 - Frontend code was modularized from monolithic `index.html` into `styles/main.css` and `scripts/app.js` for easier debugging.
 - Added `cfg/content_quality_rules.json` and `cfg/content_quality_metrics.json` as reusable artifacts for ongoing deck-quality cleanup.
+- Added `scripts/quality_metrics.py` for per-deck/aggregate quality audits.
+- Added `scripts/enhance_cards.py` for repeatable offline batch enhancement with metrics history logging.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

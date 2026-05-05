@@ -34,6 +34,8 @@ styles/
   main.css          # App styles
 scripts/
   app.js            # App logic/state/handlers
+  quality_metrics.py # Offline quality audit tool
+  enhance_cards.py   # Offline batch enhancement pipeline
   top-utility-tools.js  # Reserved utility module (not currently wired)
 cfg/
   manifest.json     # Lists every deck file
@@ -119,6 +121,26 @@ Edit any file in `cfg/decks/` directly — they're plain JSON:
 To add a new deck:
 1. Create `cfg/decks/mydeckname.json` following the same format
 2. Add an entry to `cfg/manifest.json`
+
+## Offline quality pipeline
+
+Run a baseline audit:
+
+```bash
+python3 scripts/quality_metrics.py --decks cfg/decks --rules cfg/content_quality_rules.json
+```
+
+Preview enhancement impact without modifying decks:
+
+```bash
+python3 scripts/enhance_cards.py --dry-run
+```
+
+Apply enhancement and append history to `cfg/content_quality_metrics.json`:
+
+```bash
+python3 scripts/enhance_cards.py
+```
 
 ## Card statuses
 

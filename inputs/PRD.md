@@ -56,6 +56,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 24. Advanced Controls panel for auto-export and swipe sensitivity tuning with device-profile auto-detect and custom override.
 25. Modularized frontend assets (HTML shell + external CSS/JS) for maintainability and reuse.
 26. Quality-control artifacts for deck improvement (`cfg/content_quality_rules.json`, `cfg/content_quality_metrics.json`).
+27. Offline/batch enhancement pipeline scripts for repeatable cleanup and quality tracking.
 
 ## Category Coverage (Implemented)
 - Algebra
