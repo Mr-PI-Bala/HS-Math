@@ -43,3 +43,6 @@
 34. [Implemented] Split legend into Swipe Gestures and Keyboard Commands sections.
 35. [Implemented] Add Core/Optional breakdown beside Total in top stats row and remove redundant left Dashboard block.
 36. [Implemented] Add touch-only swipe hint chip in center panel for first two cards with dismiss persistence.
+37. [Implemented] Add Advanced Controls section in right rail for auto-export + swipe tuning controls.
+38. [Implemented] Add auto-detect device profile (iPad/iPhone/Android/desktop) with user override and custom sensitivity.
+39. [Implemented] Persist advanced controls settings in local storage and export/import JSON.

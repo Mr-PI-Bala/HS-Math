@@ -933,6 +933,64 @@
       color: var(--text);
     }
 
+    .advanced-box {
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .advanced-subhead {
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .advanced-row {
+      display: grid;
+      gap: 0.16rem;
+      font-size: 0.62rem;
+      color: var(--text);
+    }
+
+    .advanced-row select {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.18rem 0.3rem;
+      font-size: 0.64rem;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .advanced-row-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.32rem;
+    }
+
+    .advanced-row-grid label {
+      display: grid;
+      gap: 0.12rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .advanced-row-grid input {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.16rem 0.28rem;
+      font-size: 0.64rem;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .advanced-note {
+      font-size: 0.56rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
     .sidebar-toggle {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -1260,16 +1318,50 @@
               </div>
             </section>
 
-            <section class="rail-group collapsed" id="rail-auto-export">
-              <h3 class="rail-head">Auto Export <span class="rail-toggle">▼</span></h3>
+            <section class="rail-group collapsed" id="rail-advanced-controls">
+              <h3 class="rail-head">Advanced Controls <span class="rail-toggle">▼</span></h3>
               <div class="rail-group-body">
-              <div class="save-guide" style="margin-top:0.65rem; padding:0.65rem;">
+              <div class="save-guide advanced-box" style="margin-top:0.65rem; padding:0.65rem;">
+                <div class="advanced-subhead">Auto Export</div>
                 <label class="auto-export-row">
                   <input type="checkbox" id="auto-export-toggle" checked />
                   <span>Auto-export every</span>
                   <input type="number" id="auto-export-every" min="1" step="1" value="5" aria-label="Auto export interval" />
                   <span>completed cards</span>
                 </label>
+
+                <div class="advanced-subhead" style="margin-top:0.65rem;">Swipe Tuning</div>
+                <div class="advanced-row">
+                  <label for="swipe-device-profile">Device Profile</label>
+                  <select id="swipe-device-profile" aria-label="Swipe device profile">
+                    <option value="auto">Auto-detect</option>
+                    <option value="ipad">iPad</option>
+                    <option value="iphone">iPhone</option>
+                    <option value="android-phone">Android Phone</option>
+                    <option value="android-tablet">Android Tablet</option>
+                    <option value="desktop">Desktop/Trackpad</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </div>
+                <div class="advanced-note" id="swipe-detected-note"></div>
+
+                <div class="advanced-row-grid">
+                  <label>Min Distance (px)
+                    <input type="number" id="swipe-min-distance" min="20" max="180" step="1" />
+                  </label>
+                  <label>Axis Ratio
+                    <input type="number" id="swipe-axis-ratio" min="1" max="2.5" step="0.05" />
+                  </label>
+                  <label>Tap Guard (ms)
+                    <input type="number" id="swipe-tap-guard-ms" min="80" max="600" step="10" />
+                  </label>
+                </div>
+
+                <div class="advanced-note">
+                  Min Distance: higher means fewer accidental swipes.
+                  Axis Ratio: higher means stricter horizontal/vertical intent.
+                  Tap Guard: delay to prevent swipe ending from triggering tap-to-flip.
+                </div>
               </div>
               </div>
             </section>
@@ -1338,12 +1430,26 @@ const SWIPE_HINT_DISMISS_KEY = 'hsMath_swipe_hint_dismissed_v1';
 const isTouchDevice = ('ontouchstart' in window) || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 let swipeHintDismissed = false;
 
+const SWIPE_PROFILE_DEFAULTS = {
+  ipad: { minDistance: 58, axisRatio: 1.24, tapGuardMs: 300 },
+  iphone: { minDistance: 44, axisRatio: 1.16, tapGuardMs: 250 },
+  'android-phone': { minDistance: 46, axisRatio: 1.18, tapGuardMs: 260 },
+  'android-tablet': { minDistance: 56, axisRatio: 1.22, tapGuardMs: 290 },
+  desktop: { minDistance: 64, axisRatio: 1.3, tapGuardMs: 320 },
+  custom: { minDistance: 52, axisRatio: 1.2, tapGuardMs: 280 }
+};
+
 function createEmptyProgress() {
   return {
     version: 2,
     lastExported: null,
     actionsSinceExport: 0,
+    autoExportEnabled: true,
     autoExportEvery: 5,
+    swipeProfile: 'auto',
+    swipeMinDistance: 52,
+    swipeAxisRatio: 1.2,
+    swipeTapGuardMs: 280,
     cards: {},
     deckStats: {}
   };
@@ -1358,7 +1464,12 @@ function normalizeProgressData(raw) {
       version: raw.version || 2,
       lastExported: raw.lastExported || null,
       actionsSinceExport: Number(raw.actionsSinceExport || 0),
+      autoExportEnabled: raw.autoExportEnabled !== undefined ? !!raw.autoExportEnabled : true,
       autoExportEvery: Number(raw.autoExportEvery || 5),
+      swipeProfile: typeof raw.swipeProfile === 'string' ? raw.swipeProfile : 'auto',
+      swipeMinDistance: Number(raw.swipeMinDistance || 52),
+      swipeAxisRatio: Number(raw.swipeAxisRatio || 1.2),
+      swipeTapGuardMs: Number(raw.swipeTapGuardMs || 280),
       cards: raw.cards,
       deckStats: raw.deckStats && typeof raw.deckStats === 'object' ? raw.deckStats : {}
     };
@@ -1422,10 +1533,80 @@ function getAutoExportEvery() {
   return Math.max(1, Math.floor(value));
 }
 
-function syncAutoExportControls() {
-  const input = $('auto-export-every');
-  if (!input) return;
-  input.value = String(getAutoExportEvery());
+function detectDeviceProfile() {
+  const ua = (navigator.userAgent || '').toLowerCase();
+  const maxTouch = Number(navigator.maxTouchPoints || 0);
+  const width = Math.min(window.innerWidth || 1200, window.innerHeight || 1200);
+
+  if (ua.includes('iphone')) return 'iphone';
+  if (ua.includes('ipad')) return 'ipad';
+  if (ua.includes('android')) return ua.includes('mobile') ? 'android-phone' : 'android-tablet';
+  if (ua.includes('mac') && maxTouch > 1) return 'ipad';
+  if (!isTouchDevice) return 'desktop';
+  return width <= 820 ? 'android-phone' : 'android-tablet';
+}
+
+function getDefaultSwipeSettings(profile) {
+  const resolved = profile === 'auto' ? detectDeviceProfile() : profile;
+  return SWIPE_PROFILE_DEFAULTS[resolved] || SWIPE_PROFILE_DEFAULTS.custom;
+}
+
+function getSwipeConfig() {
+  return {
+    minDistance: Math.max(20, Math.min(180, Number(progressData.swipeMinDistance || 52))),
+    axisRatio: Math.max(1, Math.min(2.5, Number(progressData.swipeAxisRatio || 1.2))),
+    tapGuardMs: Math.max(80, Math.min(600, Number(progressData.swipeTapGuardMs || 280)))
+  };
+}
+
+function applySwipeProfile(profile, persist = true) {
+  const defaults = getDefaultSwipeSettings(profile);
+  progressData.swipeProfile = profile;
+  progressData.swipeMinDistance = defaults.minDistance;
+  progressData.swipeAxisRatio = defaults.axisRatio;
+  progressData.swipeTapGuardMs = defaults.tapGuardMs;
+  if (persist) saveProgress();
+  syncAdvancedControls();
+}
+
+function syncAdvancedControls() {
+  const autoEveryInput = $('auto-export-every');
+  const autoToggle = $('auto-export-toggle');
+  const profileSelect = $('swipe-device-profile');
+  const minInput = $('swipe-min-distance');
+  const ratioInput = $('swipe-axis-ratio');
+  const guardInput = $('swipe-tap-guard-ms');
+  const note = $('swipe-detected-note');
+
+  if (autoEveryInput) autoEveryInput.value = String(getAutoExportEvery());
+  if (autoToggle) autoToggle.checked = progressData.autoExportEnabled !== false;
+
+  const profile = progressData.swipeProfile || 'auto';
+  if (profileSelect) profileSelect.value = profile;
+  if (minInput) minInput.value = String(Math.round(Number(progressData.swipeMinDistance || 52)));
+  if (ratioInput) ratioInput.value = String(Number(progressData.swipeAxisRatio || 1.2).toFixed(2));
+  if (guardInput) guardInput.value = String(Math.round(Number(progressData.swipeTapGuardMs || 280)));
+
+  if (note) {
+    const detected = detectDeviceProfile();
+    note.textContent = profile === 'auto'
+      ? 'Auto mode detected: ' + detected + '. You can tweak values any time; editing a value switches to Custom.'
+      : 'Profile: ' + profile + '. Use Custom (or edit fields) for manual tuning.';
+  }
+}
+
+function ensureAdvancedSettings() {
+  const validProfile = ['auto', 'ipad', 'iphone', 'android-phone', 'android-tablet', 'desktop', 'custom'].includes(progressData.swipeProfile);
+  if (!validProfile) progressData.swipeProfile = 'auto';
+
+  if (progressData.swipeProfile === 'auto') {
+    applySwipeProfile('auto', false);
+  } else {
+    const cfg = getSwipeConfig();
+    progressData.swipeMinDistance = cfg.minDistance;
+    progressData.swipeAxisRatio = cfg.axisRatio;
+    progressData.swipeTapGuardMs = cfg.tapGuardMs;
+  }
 }
 
 function getStatus(cardId) {
@@ -1460,7 +1641,7 @@ function recordAction(deckId, type) {
   saveProgress();
 
   const autoEvery = getAutoExportEvery();
-  if ($('auto-export-toggle').checked && progressData.actionsSinceExport > 0 && progressData.actionsSinceExport % autoEvery === 0) {
+  if (progressData.autoExportEnabled !== false && progressData.actionsSinceExport > 0 && progressData.actionsSinceExport % autoEvery === 0) {
     exportProgress({ auto: true });
   }
 }
@@ -2003,20 +2184,22 @@ function onSwipeEnd(clientX, clientY) {
   const dy = clientY - swipeStartY;
   const absX = Math.abs(dx);
   const absY = Math.abs(dy);
-  const minDistance = 48;
+  const cfg = getSwipeConfig();
+  const minDistance = cfg.minDistance;
+  const axisRatio = cfg.axisRatio;
 
   if (absX < minDistance && absY < minDistance) return;
 
-  if (absX >= absY * 1.2) {
+  if (absX >= absY * axisRatio) {
     suppressNextCardClick = true;
-    setTimeout(() => { suppressNextCardClick = false; }, 280);
+    setTimeout(() => { suppressNextCardClick = false; }, cfg.tapGuardMs);
     handleSwipeAction(dx > 0 ? 'right' : 'left');
     return;
   }
 
-  if (absY >= absX * 1.2) {
+  if (absY >= absX * axisRatio) {
     suppressNextCardClick = true;
-    setTimeout(() => { suppressNextCardClick = false; }, 280);
+    setTimeout(() => { suppressNextCardClick = false; }, cfg.tapGuardMs);
     handleSwipeAction(dy > 0 ? 'down' : 'up');
   }
 }
@@ -2294,6 +2477,12 @@ document.addEventListener('keydown', e => {
 
 $('btn-export').addEventListener('click', exportProgress);
 
+$('auto-export-toggle').addEventListener('change', e => {
+  progressData.autoExportEnabled = !!e.target.checked;
+  saveProgress();
+  showToast(progressData.autoExportEnabled ? 'Auto-export enabled.' : 'Auto-export disabled.');
+});
+
 $('auto-export-every').addEventListener('change', e => {
   const nextValue = Math.max(1, Math.floor(Number(e.target.value || 5)));
   progressData.autoExportEvery = nextValue;
@@ -2302,12 +2491,46 @@ $('auto-export-every').addEventListener('change', e => {
   showToast('Auto-export interval set to every ' + nextValue + ' completed cards.');
 });
 
+$('swipe-device-profile').addEventListener('change', e => {
+  const profile = e.target.value;
+  if (profile === 'custom') {
+    progressData.swipeProfile = 'custom';
+    saveProgress();
+    syncAdvancedControls();
+    showToast('Swipe profile set to Custom.');
+    return;
+  }
+  applySwipeProfile(profile, true);
+  showToast('Swipe profile set to ' + profile + '.');
+});
+
+function onSwipeNumericSettingChange(inputId, key, parseFn, formatFn) {
+  $(inputId).addEventListener('change', e => {
+    progressData[key] = parseFn(e.target.value);
+    progressData.swipeProfile = 'custom';
+    progressData[key] = getSwipeConfig()[key === 'swipeTapGuardMs' ? 'tapGuardMs' : key === 'swipeAxisRatio' ? 'axisRatio' : 'minDistance'];
+    e.target.value = formatFn(progressData[key]);
+    saveProgress();
+    syncAdvancedControls();
+    showToast('Swipe tuning updated (Custom profile).');
+  });
+}
+
+onSwipeNumericSettingChange('swipe-min-distance', 'swipeMinDistance', v => Number(v || 52), v => String(Math.round(v)));
+onSwipeNumericSettingChange('swipe-axis-ratio', 'swipeAxisRatio', v => Number(v || 1.2), v => String(Number(v).toFixed(2)));
+onSwipeNumericSettingChange('swipe-tap-guard-ms', 'swipeTapGuardMs', v => Number(v || 280), v => String(Math.round(v)));
+
 function buildExportPayload() {
   return {
     version: 2,
     lastExported: progressData.lastExported,
     actionsSinceExport: progressData.actionsSinceExport,
+    autoExportEnabled: progressData.autoExportEnabled !== false,
     autoExportEvery: getAutoExportEvery(),
+    swipeProfile: progressData.swipeProfile || 'auto',
+    swipeMinDistance: getSwipeConfig().minDistance,
+    swipeAxisRatio: getSwipeConfig().axisRatio,
+    swipeTapGuardMs: getSwipeConfig().tapGuardMs,
     cards: progressData.cards,
     deckStats: progressData.deckStats
   };
@@ -2387,7 +2610,8 @@ $('import-input').addEventListener('change', e => {
       const data = JSON.parse(ev.target.result);
       progressData = normalizeProgressData(data);
       saveProgress();
-      syncAutoExportControls();
+      ensureAdvancedSettings();
+      syncAdvancedControls();
       buildQueue();
       renderStats();
       renderSidebar();
@@ -2438,7 +2662,8 @@ function showToast(msg) {
 
 loadProgress();
 loadSwipeHintPreference();
-syncAutoExportControls();
+ensureAdvancedSettings();
+syncAdvancedControls();
 loadDecks().catch(err => {
   statsBar.innerHTML = 'Could not load decks. Serve this app over HTTP (not file://).';
   console.error(err);

@@ -10,7 +10,7 @@
 
 ## Core JS State (index.html)
 - decks[]
-- progressData { cards, deckStats, actionsSinceExport, lastExported, autoExportEvery }
+- progressData { cards, deckStats, actionsSinceExport, lastExported, autoExportEnabled, autoExportEvery, swipeProfile, swipeMinDistance, swipeAxisRatio, swipeTapGuardMs }
 - queue[]
 - queueIdx
 - revealed
@@ -45,9 +45,9 @@ Back:
 
 ## Layout Density Rules
 - Top toolbar (category/filter/current) rendered as a slim single row above workspace.
-- Left dashboard and right control rail use compact typography and spacing.
+- Left category rail and right control rail use compact typography and spacing.
 - Left deck list is rendered as collapsible stack cards; active deck stack opens by default.
-- Right rail sections (Legend/Session/Data/Auto Export) are collapsible.
+- Right rail sections (Legend/Session/Data/Advanced Controls) are collapsible.
 - Action buttons and keyboard hint row are condensed to preserve vertical card space.
 - Primary layout objective: maximize flashcard viewport area while retaining controls.
 
@@ -58,6 +58,7 @@ Back:
 - Swipe Left: previous card
 - Swipe Right: skip
 - Swipe hint chip shown for touch devices on first two cards, with dismiss persisted in localStorage
+- Swipe behavior is configurable via device profile and sensitivity thresholds
 - Hint button / H: reveal next hint level
 - Strong/Review: mark and advance
 - Right Arrow: skip
@@ -83,6 +84,7 @@ Back:
 - import parses uploaded JSON and normalizes schema
 - reset clears progressData to defaults
 - autoExportEvery is persisted in localStorage and included in export/import payload
+- autoExportEnabled and swipe tuning settings are persisted in localStorage and included in export/import payload
 - swipe hint dismiss preference is persisted in localStorage
 
 ## Undo Model

@@ -77,6 +77,13 @@ Progress is stored in **localStorage** during your session. To persist it across
 Auto-export cadence is configurable from the right rail: set the number of completed cards for each automatic export.
 This threshold is saved in local storage and included in export/import JSON.
 
+At the bottom of the right rail, **Advanced Controls** groups geeky tuning options:
+- Auto-export enable/disable and interval
+- Swipe device profile (auto-detect iPad/iPhone/Android/desktop)
+- Swipe sensitivity tuning (Min Distance, Axis Ratio, Tap Guard)
+
+If you tweak sensitivity values manually, profile switches to Custom so overrides stay explicit.
+
 Left category deck stacks and right-rail control groups are collapsible to preserve flashcard space.
 Top stats include Total(core, optional) so you can see the breakdown at a glance.
 

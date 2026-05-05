@@ -39,20 +39,21 @@ Provide a high-impact, low-friction study tool for middle school and high school
 7. Previous/next/skip navigation.
 8. Hint ladder on question side with 3 progressive levels.
 9. Answer side with steps + tip + real-world example.
-10. Auto-export cadence (user-defined threshold, toggleable).
+10. Auto-export cadence (user-defined threshold, toggleable, persisted).
 11. Export, import, and clipboard copy JSON controls.
 12. Session controls: End Session (pause) and Reset Progress (clear data).
 13. Keyboard navigation and legend.
 14. Swipe gesture navigation on touch devices (center study area).
 15. Responsive two-column study layout with right-side control rail.
-15. Multiple deck families: HS, AP, MS, and bonus fun/tricks.
-16. Hint ladder behavior: H/h and hint button reveal clues without flipping card.
-17. Documentation governance via AGENTS.md and inputs workflow.
-18. Content containment: long text is clamped within card regions with click-to-expand popup.
-19. Compact hint progress badge shown next to hint button.
-20. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
-21. Collapsible deck stacks on left dashboard and collapsible grouped controls on right rail.
-22. Touch-only swipe hint chip shown in center panel on first two cards with persistent dismiss option.
+16. Multiple deck families: HS, AP, MS, and bonus fun/tricks.
+17. Hint ladder behavior: H/h and hint button reveal clues without flipping card.
+18. Documentation governance via AGENTS.md and inputs workflow.
+19. Content containment: long text is clamped within card regions with click-to-expand popup.
+20. Compact hint progress badge shown next to hint button.
+21. Layout density optimization to maximize flashcard area (slim sidebars, slim right rail, slim top/bottom controls).
+22. Collapsible deck stacks on left category rail and collapsible grouped controls on right rail.
+23. Touch-only swipe hint chip shown in center panel on first two cards with persistent dismiss option.
+24. Advanced Controls panel for auto-export and swipe sensitivity tuning with device-profile auto-detect and custom override.
 
 ## Category Coverage (Implemented)
 - Algebra

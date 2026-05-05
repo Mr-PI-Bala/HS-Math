@@ -16,6 +16,11 @@
 - Left sidebar deck cards now use collapsible stack sections; active deck remains open by default.
 - Auto-export cadence now uses a user-entered card threshold and persists through local save/export/import.
 - Added touch-only swipe hint chip for first two cards with dismiss persistence.
+- Added Advanced Controls section at bottom of right rail for geeky tuning workflows.
+- Advanced Controls include auto-export toggle + interval and swipe settings in one place.
+- Added auto-detect device profile (iPad/iPhone/Android/desktop) with custom override.
+- Swipe sensitivity settings now expose Min Distance, Axis Ratio, and Tap Guard with explanatory guidance.
+- Advanced controls persist via local save and are included in export/import payload.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

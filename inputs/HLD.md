@@ -23,6 +23,7 @@
 - Deck-level action counters
 - Undo support for recent action
 - Auto-export action threshold handling (user-configurable cadence)
+- Persisted advanced control preferences for touch/auto-export behavior
 
 4. UX and Navigation
 - Sidebar focused on deck categories
@@ -31,9 +32,11 @@
 - Left and right rails consume full workspace height below top stats row
 - Left sidebar deck cards are collapsible stacks (active deck open by default)
 - Right rail for grouped controls and legend with collapsible sections
+- Right rail Advanced Controls group for device profile and swipe tuning
 - Keyboard mapping for high-speed operation
 - Touch swipe mapping for iPad/tablet operation on center study area
 - Touch-only onboarding hint chip for swipe actions (first two cards, dismissible, persisted)
+- Device-profile auto-detect with user override (iPad/iPhone/Android/desktop/custom)
 - Hint interaction policy where hints do not force answer reveal
 
 5. Pedagogy Layer
