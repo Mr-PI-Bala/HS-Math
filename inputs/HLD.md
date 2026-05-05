@@ -25,7 +25,11 @@
 - Auto-export action threshold handling (user-configurable cadence)
 - Persisted advanced control preferences for touch/auto-export behavior
 
-4. UX and Navigation
+4. Content Quality Pipeline Storage
+- `cfg/content_quality_rules.json` holds reusable anti-blah detection rules.
+- `cfg/content_quality_metrics.json` stores historical before/after improvement metrics.
+
+5. UX and Navigation
 - Sidebar focused on deck categories
 - Toolbar with aligned category + card filter + current state above flashcards
 - Top stats row includes total plus core/optional split

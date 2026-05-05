@@ -7,6 +7,8 @@
 - cfg/manifest.json: list of deck file references
 - cfg/decks/*.json: deck and card content
 - cfg/progress.json: repository source-of-truth progress template
+- cfg/content_quality_rules.json: anti-blah quality rules for offline enhancement
+- cfg/content_quality_metrics.json: historical before/after quality metrics
 - AGENTS.md: project-level instruction and delivery workflow
 - inputs/*.md: documentation and lifecycle tracking
 

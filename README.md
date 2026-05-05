@@ -38,6 +38,8 @@ scripts/
 cfg/
   manifest.json     # Lists every deck file
   progress.json     # Single source of truth for committed progress
+  content_quality_rules.json   # Anti-blah rules for offline enhancement
+  content_quality_metrics.json # Historical quality metrics runs
   decks/
     ...13 deck JSON files (HS/AP/MS/bonus)
 inputs/

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "Deck Content Quality Rules",
+  "description": "Rules used by offline/batch enhancement to detect low-value/blah responses in tip/example/hints.",
+  "fields": ["tip", "example", "hints"],
+  "minLengthByField": {
+    "tip": 24,
+    "example": 30,
+    "hint": 22
+  },
+  "commonBlahResponses": [
+    "Tip: Anchor this to \"<cue>\" and say the rule out loud once.",
+    "Start by identifying what the question is asking for.",
+    "Choose the matching formula or rule and substitute known values.",
+    "Simplify carefully and check the result against context.",
+    "This principle is used when solving practical quantity problems, such as planning costs, distances, or growth.",
+    "Contractors use this idea when measuring floor plans, cuts, and material quantities on job sites.",
+    "Engineers use this to model changing rates, like speed changes or growth trends over time.",
+    "Analysts apply this when interpreting survey data to make evidence-based decisions.",
+    "If a savings account compounds monthly, this concept helps estimate how your balance changes over time."
+  ],
+  "regexPatterns": [
+    "anchor this to",
+    "say the rule out loud",
+    "start by identifying what the question is asking",
+    "choose the matching formula or rule",
+    "simplify carefully and check the result",
+    "this principle is used when solving practical quantity problems",
+    "contractors use this idea",
+    "engineers use this to model changing rates",
+    "analysts apply this when interpreting survey data",
+    "savings account compounds monthly"
+  ]
+}
