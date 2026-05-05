@@ -46,3 +46,4 @@
 37. [Implemented] Add Advanced Controls section in right rail for auto-export + swipe tuning controls.
 38. [Implemented] Add auto-detect device profile (iPad/iPhone/Android/desktop) with user override and custom sensitivity.
 39. [Implemented] Persist advanced controls settings in local storage and export/import JSON.
+40. [Implemented] Split bloated single-file UI into external stylesheet and app script (`styles/main.css`, `scripts/app.js`).

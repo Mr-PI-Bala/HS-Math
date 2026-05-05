@@ -54,6 +54,7 @@ Provide a high-impact, low-friction study tool for middle school and high school
 22. Collapsible deck stacks on left category rail and collapsible grouped controls on right rail.
 23. Touch-only swipe hint chip shown in center panel on first two cards with persistent dismiss option.
 24. Advanced Controls panel for auto-export and swipe sensitivity tuning with device-profile auto-detect and custom override.
+25. Modularized frontend assets (HTML shell + external CSS/JS) for maintainability and reuse.
 
 ## Category Coverage (Implemented)
 - Algebra

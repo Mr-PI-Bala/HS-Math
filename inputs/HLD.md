@@ -1,7 +1,7 @@
 # High-Level Design (HLD)
 
 ## Architecture
-- Single-page static web app in index.html
+- Static web app with HTML shell (`index.html`) and external assets (`styles/main.css`, `scripts/app.js`)
 - Data-driven decks from cfg/manifest.json and cfg/decks/*.json
 - Local state persisted to localStorage
 - User-managed durability via export/import JSON with cfg/progress.json repository sync

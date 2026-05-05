@@ -21,6 +21,7 @@
 - Added auto-detect device profile (iPad/iPhone/Android/desktop) with custom override.
 - Swipe sensitivity settings now expose Min Distance, Axis Ratio, and Tap Guard with explanatory guidance.
 - Advanced controls persist via local save and are included in export/import payload.
+- Frontend code was modularized from monolithic `index.html` into `styles/main.css` and `scripts/app.js` for easier debugging.
 
 ## [v1.0.5] - 2026-05-04
 ### Fixed

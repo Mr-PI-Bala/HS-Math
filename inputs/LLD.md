@@ -1,7 +1,9 @@
 # Low-Level Design (LLD)
 
 ## File Map
-- index.html: complete UI, state handling, rendering, keyboard and interactions
+- index.html: HTML shell and layout structure
+- styles/main.css: extracted styling rules
+- scripts/app.js: extracted app logic (state handling, rendering, keyboard/touch interactions)
 - cfg/manifest.json: list of deck file references
 - cfg/decks/*.json: deck and card content
 - cfg/progress.json: repository source-of-truth progress template

@@ -29,7 +29,12 @@ npx serve .
 ## Project layout
 
 ```
-index.html          # The entire app (single file)
+index.html          # HTML shell
+styles/
+  main.css          # App styles
+scripts/
+  app.js            # App logic/state/handlers
+  top-utility-tools.js  # Reserved utility module (not currently wired)
 cfg/
   manifest.json     # Lists every deck file
   progress.json     # Single source of truth for committed progress
